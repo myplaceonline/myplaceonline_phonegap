@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.phonegap.helloworld" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
-    <name>Myplaceonline</name>
-    <description>Myplaceonline is a virtual life coach.</description>
-    <author email="contact@myplaceonline.com" href="https://myplaceonline.com/">Myplaceonline</author>
+<widget id="com.myplaceonline" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+    <name>myplaceonline</name>
+    <description>myplaceonline is a virtual life coach.</description>
+    <author email="contact@myplaceonline.com" href="https://myplaceonline.com/">myplaceonline</author>
     <preference name="permissions" value="none" />
     <preference name="phonegap-version" value="3.6.3" />
     <preference name="orientation" value="default" />
