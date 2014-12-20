@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.myplaceonline" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>myplaceonline</name>
-    <description>myplaceonline is a virtual life coach.</description>
+    <description>myplaceonline is a virtual life assistant. https://myplaceonline.com/</description>
     <author email="contact@myplaceonline.com" href="https://myplaceonline.com/">myplaceonline</author>
     <preference name="phonegap-version" value="3.6.3" /> <!-- http://docs.build.phonegap.com/en_US/configuring_preferences.md.html -->
     <preference name="orientation" value="default" />
