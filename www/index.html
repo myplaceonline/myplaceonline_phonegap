@@ -1,46 +1,36 @@
 <!DOCTYPE html>
-<!--
-    Copyright (c) 2012-2014 Adobe Systems Incorporated. All rights reserved.
-
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="format-detection" content="telephone=no" />
-        <meta name="msapplication-tap-highlight" content="no" />
-        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-        <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <title>Hello World</title>
-    </head>
-    <body>
-        <div class="app">
-            <h1>PhoneGap</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
-            </div>
-        </div>
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript">
-            app.initialize();
-        </script>
-    </body>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="description" content="myplaceonline is a virtual life assistant.">
+    <meta name="keywords" content="myplaceonline, virtual life assistant, life coach, organizer, passwords">
+    <meta name="DC.Rights" content="(C) Copyright Myplaceonline">
+    <meta name="Owner" content="contact@myplaceonline.com">
+    <meta name="DC.Language" content="en-US">
+    <meta name="Country" content="US">
+    <meta name="Robots" content="index,follow">
+    <meta http-equiv="Content-Language" content="en_US">
+    <title>myplaceonline</title>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="device.js"></script>
+    <script type="text/javascript" src="InAppBrowser.js"></script>
+    <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+    <link rel="shortcut icon" href="favicon.ico">
+    <script type="text/javascript">
+    </script>
+  </head>
+  <body>
+    <div id="phonegapmain" uid="phonegapmain" data-role="page" data-url="https://myplaceonline.com">
+      <div class="divcenter">
+        <p>Loading...</p>
+        <div id="pgextra"></div>
+      </div>
+    </div>
+  </body>
 </html>
