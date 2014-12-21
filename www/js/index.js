@@ -98,6 +98,7 @@ app = {
 
   loadHomepage: function() {
     consoleLog("phonegap loadHomepage");
+    alert($("base").length);
     $("base").attr("href", app.base_url + "/");
     app.navigate("/?phonegap=true");
   },
