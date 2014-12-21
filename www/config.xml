@@ -24,7 +24,7 @@ http://docs.phonegap.com/en/3.6.0/guide_platforms_android_config.md.html
     <preference name="android-minSdkVersion" value="7" />
     <preference name="android-installLocation" value="auto" />
     <preference name="KeepRunning" value="true" />
-    <preference name="AndroidLaunchMode" value="singleTask"/>
+    <preference name="AndroidLaunchMode" value="singleInstance"/>
     <gap:plugin name="org.apache.cordova.battery-status" />
     <gap:plugin name="org.apache.cordova.camera" />
     <gap:plugin name="org.apache.cordova.media-capture" />
