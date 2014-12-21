@@ -49,7 +49,7 @@ app = {
     if (window.StatusBar) {
       StatusBar.overlaysWebView(false);
       //StatusBar.backgroundColorByHexString("#321e15");
-      StatusBar.styleLightContent();
+      //StatusBar.styleLightContent();
     }
     $(document).on('click', 'a.externallink', function(ev) {
       try {
