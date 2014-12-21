@@ -125,7 +125,7 @@ app = {
   onMenuButton: function() {
     consoleLog("phonegap onMenuButton");
     var hmPopupSel = "#headerMenuPopup";
-    var optPopupSel = "#optionsPopup";
+    var optPopupSel = "#menuPopup";
     var p = getActivePage();
     if (p) {
       var uid = $(p).attr('data-uniqueid');
