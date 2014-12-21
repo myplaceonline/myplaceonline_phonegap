@@ -119,6 +119,8 @@ app = {
 
     if (!myp.isInitialPhonegapPage || window.location.hash.indexOf("ui-state=dialog") != -1) {
       window.history.go(-1);
+    } else {
+      app.close();
     }
   },
 
