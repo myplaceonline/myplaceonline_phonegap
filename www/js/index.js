@@ -100,6 +100,7 @@ app = {
   loadHomepage: function() {
     consoleLog("phonegap loadHomepage");
     $("base").attr("href", app.base_url + "/");
+    $.mobile.path.documentBase = $.mobile.path.parseUrl(app.base_url + "/");
     app.navigate("/?phonegap=true");
   },
 
