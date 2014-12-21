@@ -19,6 +19,7 @@ app = {
     app.savePhonegapPath();
     $.support.cors = true;
     $.mobile.allowCrossDomainPages = true;
+    $.mobile.defaultPageTransition = "none";
     myp.allowFocusPlaceholder = false;
     myp.inPhoneGap = true;
     $(document).on("pagecontainerchangefailed.phonegap", app.loadFailed);
@@ -98,7 +99,6 @@ app = {
 
   loadHomepage: function() {
     consoleLog("phonegap loadHomepage");
-    alert($("base").length);
     $("base").attr("href", app.base_url + "/");
     app.navigate("/?phonegap=true");
   },
