@@ -94,7 +94,7 @@ app = {
     setTimeout(function() {
       navigator.splashscreen.hide();
       app.loadHomepage();
-    }, 2000);
+    }, 1000);
   },
 
   loadHomepage: function() {
