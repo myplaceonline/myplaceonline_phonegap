@@ -156,7 +156,6 @@ app = {
         $("#refresh_button").click(function() {
           $.mobile.pageContainer.pagecontainer("change", ui.toPage);
         });
-        $("#refresh_button").button();
         var offlineData = getMyplaceonlineSnapshot();
         if (offlineData) {
           $("#pgextra").append("<p>There is also an offline snapshot created at " + offlineData.time + "</p><p><a class='ui-btn' id='offline_button'>Load Offline Snapshot</a></p>");
@@ -164,8 +163,8 @@ app = {
             var offlineData = getMyplaceonlineSnapshot();
             alert(offlineData.user.id);
           });
-          $("#offline_button").button();
         }
+        ensureStyledPage();
       } else {
         // This could have just been a network blip and JQM will show an error popup and then the user can
         // try again
