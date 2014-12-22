@@ -6,6 +6,8 @@ app = {
   firstLoad: true,
 
   phonegapPath: "",
+  
+  phonegapHomepage: "",
 
   // The basic flow is: JQM mobileinit calls this function. This function registers
   // a JQM pageloaded handler for the main built-in page. Once the built-in page loads,
@@ -27,8 +29,8 @@ app = {
   },
 
   savePhonegapPath: function() {
-    var path = window.location.pathname;
-    app.phonegapPath = path.substring(0, path.lastIndexOf('/') + 1);
+    app.phonegapHomepage = window.location.pathname;
+    app.phonegapPath = app.phonegapHomepage.substring(0, app.phonegapHomepage.lastIndexOf('/') + 1);
   },
 
   initialpageloaded: function() {
