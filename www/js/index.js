@@ -29,8 +29,9 @@ app = {
   },
 
   savePhonegapPath: function() {
-    app.phonegapHomepage = window.location.pathname;
-    app.phonegapPath = app.phonegapHomepage.substring(0, app.phonegapHomepage.lastIndexOf('/') + 1);
+    app.phonegapHomepage = window.location;
+    var path = window.location.pathname;
+    app.phonegapPath = path.substring(0, path.lastIndexOf('/') + 1);
   },
 
   initialpageloaded: function() {
