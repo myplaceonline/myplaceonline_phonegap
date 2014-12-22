@@ -42,7 +42,9 @@
       </div>
       <script type="text/javascript">
       onPageLoad(function() {
-        alert('loading pg homepage');
+        if (app.exported) {
+          alert('has exported data');
+        }
       });
       </script>
     </div>
