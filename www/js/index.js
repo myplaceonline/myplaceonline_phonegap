@@ -167,7 +167,7 @@ app = {
           $("#offline_button").click(function(e) {
             var offlineData = getMyplaceonlineSnapshot();
             if (offlineData) {
-              app.navigate(app.phonegapHomepage.replace("index.html", "offline.html"));
+              navigate(app.phonegapHomepage.replace("index.html", "offline.html"), true);
             }
             e.preventDefault();
             return false;
