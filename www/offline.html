@@ -31,14 +31,167 @@
       $(document).on("mobileinit.phonegapmobileinit", app.mobileinit);
     </script>
     <script src="js/jquery.mobile-1.4.5.min.js"></script>
+    <script type="text/javascript" src="js/handlebars-v2.0.0.js"></script>
+    <script type="text/javascript" src="js/ember-1.9.0.js"></script>
+    <script type="text/javascript" src="js/forge.min.js"></script>
   </head>
   <body>
     <div id="phonegapmain" data-uniqueid="phonegapmain" data-role="page">
       <div data-role="header">
         <h1>myplaceonline</h1>
       </div>
-      <div role="main" class="ui-content" style="text-align: center">
-        <p>Offline</p>
+      <div role="main" class="ui-content">
+        <div id="emberContainer"></div>
+
+        <script type="text/x-handlebars">
+          {{outlet}}
+        </script>
+
+        <script type="text/x-handlebars" data-template-name="index">
+          <ul data-role="listview" data-inset="true">
+          {{#each category in categories}}
+            <li>{{#link-to category.link}}{{category.title}} <span class="ui-li-count">{{category.count}}</span>{{/link-to}}</li>
+          {{/each}}
+          </ul>
+        </script>
+
+        <script type="text/x-handlebars" data-template-name="passwords">
+          <ul data-role="listview" data-inset="true" data-filter="true">
+          {{#each password in model}}
+            <li>{{#link-to "password" password}}{{password.name}}{{/link-to}}</li>
+          {{/each}}
+          </ul>
+        </script>
+
+        <script type="text/x-handlebars" data-template-name="password">
+          <h1>{{model.name}}</h1>
+          <p>User: {{model.user}}</p>
+          <p>Password: {{password}}</p>
+          <p>Account: {{model.account_number}}</p>
+          <p>Notes: {{model.notes}}</p>
+          <p>URL: {{model.url}}</p>
+        </script>
+
+        <script type="text/javascript">
+        onPageLoad(function() {
+          if (window.localStorage) {
+            window.appsnapshot = getMyplaceonlineSnapshot();
+            if (window.appsnapshot) {
+              window.App = Ember.Application.create({
+                rootElement: '#emberContainer',
+                ready: function() {
+                  $.mobile.window.unbind({ 
+                    "popstate.history": $.proxy( this.popstate, this ),
+                    "hashchange.history": $.proxy( this.hashchange, this )
+                  });
+                  $.mobile.changePage = function() {};
+                  $.mobile.ajaxEnabled = false;
+                  $.mobile.pushStateEnabled = false;
+                  $.mobile.linkBindingEnabled = false;
+                  $.mobile.hashListeningEnabled = false;
+                }
+              });
+              
+              App.Router.reopen({
+                rootURL: '/offline/'
+              });
+              
+              App.IndexRoute = Ember.Route.extend({
+                setupController: function(controller, model) {
+                  var categories = [];
+                  $.each(model.categories, function(i, x) {
+                    if (x.parent_id > 0) {
+                      categories.push(x);
+                    }
+                  });
+                  controller.set("model", model);
+                  controller.set("categories", categories);
+                },
+                model: function() {
+                  return window.appsnapshot;
+                }
+              });
+              
+              App.IndexView = Ember.View.extend({
+                didInsertElement : function() {
+                  ensureStyledPage();
+                }
+              });
+
+              App.PasswordsRoute = Ember.Route.extend({
+                model: function() {
+                  return window.appsnapshot.user.primary_identity.passwords;
+                }
+              });
+              
+              App.PasswordsView = Ember.View.extend({
+                didInsertElement : function() {
+                  ensureStyledPage();
+                }
+              });
+
+              App.PasswordRoute = Ember.Route.extend({
+                setupController: function(controller, model) {
+                  var password = null;
+                  if (model.is_encrypted_password) {
+                    var sessionPassword = getSessionPassword();
+                    var encrypted_value = null;
+                    $.each(window.appsnapshot.user.encrypted_values, function(i, x) {
+                      if (x.id == model.encrypted_password_id) {
+                        encrypted_value = x;
+                        return false;
+                      }
+                    });
+                    if (encrypted_value) {
+                      var salt = forge.util.decode64(encrypted_value.salt);
+                      var key = forge.pkcs5.pbkdf2(sessionPassword, salt, 65536, 32);
+                      var val = forge.util.decode64(encrypted_value.val);
+                      
+                      var i = val.indexOf("--");
+                      var data = forge.util.decode64(val.substring(0, i));
+                      var digest = val.substring(i + 2);
+                      // TODO verify digest (message_verifier.rb secure_compare)
+                      
+                      i = data.indexOf("--");
+                      var encrypted_data = forge.util.decode64(data.substring(0, i));
+                      var iv = forge.util.decode64(data.substring(i + 2));
+
+                      var decipher = forge.cipher.createDecipher('AES-CBC', key);
+                      decipher.start({iv: iv});
+                      decipher.update(forge.util.createBuffer(encrypted_data));
+                      if (decipher.finish()) {
+                        password = decipher.output.toString();
+                      } else {
+                        password = "Invalid password or other decryption error.";
+                        window.sessionPassword = null;
+                      }
+                    }
+                  } else {
+                    password = model.password;
+                  }
+                  controller.set("model", model);
+                  controller.set("password", password);
+                },
+                model: function(params) {
+                  var result = null;
+                  $.each(window.appsnapshot.user.primary_identity.passwords, function(i, x) {
+                    if (x.id == params.id) {
+                      result = x;
+                      return false;
+                    }
+                  });
+                  return result;
+                }
+              });
+              
+              App.Router.map(function() {
+                this.resource('passwords');
+                this.resource('password', { path: '/password/:id' });
+              });
+            }
+          }
+        });
+        </script>
       </div>
     </div>
   </body>
