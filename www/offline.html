@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="description" content="myplaceonline is a virtual life assistant.">
+    <meta name="keywords" content="myplaceonline, virtual life assistant, life coach, organizer, passwords">
+    <meta name="Owner" content="contact@myplaceonline.com">
+    <meta name="DC.Language" content="en-US">
+    <meta name="Country" content="US">
+    <meta name="Robots" content="index,follow">
+    <meta http-equiv="Content-Language" content="en_US">
+    <title>myplaceonline</title>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="device.js"></script>
+    <script type="text/javascript" src="InAppBrowser.js"></script>
+    <script type="text/javascript" src="clipboard.js"></script>
+    <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css">
+    <script src="js/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="js/myplaceonline.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript">
+      app.offline = true;
+      $(document).on("mobileinit.phonegapmobileinit", app.mobileinit);
+    </script>
+    <script src="js/jquery.mobile-1.4.5.min.js"></script>
+  </head>
+  <body>
+    <div id="phonegapmain" data-uniqueid="phonegapmain" data-role="page">
+      <div data-role="header">
+        <h1>myplaceonline</h1>
+      </div>
+      <div role="main" class="ui-content" style="text-align: center">
+        <p>Offline</p>
+      </div>
+    </div>
+  </body>
+</html>

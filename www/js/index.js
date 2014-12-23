@@ -8,6 +8,8 @@ app = {
   phonegapPath: "",
   
   phonegapHomepage: "",
+  
+  offline: false,
 
   // The basic flow is: JQM mobileinit calls this function. This function registers
   // a JQM pageloaded handler for the main built-in page. Once the built-in page loads,
@@ -96,7 +98,10 @@ app = {
     // Hack: If we call splashcreen.hide immediately, there's a blank flash in between
     setTimeout(function() {
       navigator.splashscreen.hide();
-      app.loadHomepage();
+      if (!app.offline) {
+        app.loadHomepage();
+      } else {
+      }
     }, 1000);
   },
 
@@ -162,6 +167,7 @@ app = {
           $("#offline_button").click(function(e) {
             var offlineData = getMyplaceonlineSnapshot();
             if (offlineData) {
+              app.navigate(app.phonegapHomepage.replace("index.html", "offline.html"));
             }
             e.preventDefault();
             return false;
