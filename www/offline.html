@@ -92,9 +92,9 @@
                 }
               });
               
-              //App.Router.reopen({
-              //  rootURL: '/'
-              //});
+              App.Router.reopen({
+                rootURL: '/offline/'
+              });
               
               App.IndexRoute = Ember.Route.extend({
                 setupController: function(controller, model) {
