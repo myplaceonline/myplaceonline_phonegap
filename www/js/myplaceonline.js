@@ -1,5 +1,5 @@
 // myplaceonline.js
-// Version 0.7
+// Version 0.11
 //
 // Notes:
 //  * When changing this file, you may need to apply the same changes to
@@ -22,7 +22,8 @@ var myp = {
   debugMessages: [],
   inPhoneGap: false,
   audioMarkers: [],
-  snapshotKey: "myplaceonline_offline_snapshot"
+  snapshotKey: "myplaceonline_offline_snapshot",
+  contact_email: "contact@myplaceonline.com"
 };
 
 function consoleLog(msg) {
@@ -203,7 +204,7 @@ function submitForm(frm) {
 }
 
 function criticalError(msg) {
-  msg = "Browser Error. Please copy and report the following details to contact@myplaceonline.com: " + msg;
+  msg = "Browser Error. Please copy and report the following details to " + myp.contact_email + ": " + msg;
   consoleLog(msg);
   if (myp) {
     myp.jserrors++;
@@ -398,6 +399,15 @@ $(document).on("mobileinit.myp", function() {
   $(document).on("pagebeforecreate.updatedataurl", "[data-role=page]", null, function(e) {
     var dataUrl = $(this).attr("data-url");
     $(this).attr("data-url",dataUrl.replace(/&amp;/g,"&"));
+  });
+
+  // http://api.jquerymobile.com/pagecontainer/#event-loadfailed
+  $(document).on("pagecontainerloadfailed", $.mobile.pageContainer, function(event, ui) {
+    // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest#Properties
+    alert("Error " + ui.xhr.status + "\n" + ui.xhr.responseText + "\n\nPlease try again or report the error to " + myp.contact_email);
+    // https://github.com/jquery/jquery-mobile/issues/3143
+    // event.preventDefault();
+    // ui.deferred.reject( ui.absUrl, ui.options );
   });
 });
 
@@ -684,17 +694,25 @@ function jqmSetListMessage(list, message) {
   list.trigger("updatelayout");
 }
 
-/* items: [{title: String, link: String, count: Integer}, ...] */
+/* items: [{title: String, link: String, count: Integer, filtertext: String, icon: String}, ...] */
 function jqmSetList(list, items, header) {
   var html = "";
   if (header) {
     html += "<li data-role='list-divider'>" + header + "</li>";
   }
   $.each(items, function (i, x) {
+    var filtertext = x.title;
+    if (x.filtertext) {
+      filtertext = x.filtertext;
+    }
+    var icon = "";
+    if (x.icon) {
+      icon = "<img alt='" + x.title + "' title='" + x.title + "' class='ui-li-icon' height='16' width='16' src='" + x.icon + "' />";
+    }
     if (typeof x.count !== 'undefined') {
-      html += "<li><a href='" + x.link + "'>" + x.title + " <span class='ui-li-count'>" + x.count + "</span></a></li>";
+      html += "<li data-filtertext='" + filtertext + "'><a href='" + x.link + "'>" + icon + x.title + " <span class='ui-li-count'>" + x.count + "</span></a></li>";
     } else {
-      html += "<li><a href='" + x.link + "'>" + x.title + "</a></li>";
+      html += "<li data-filtertext='" + filtertext + "'><a href='" + x.link + "'>" + icon + x.title + "</a></li>";
     }
   });
   list.html(html);
