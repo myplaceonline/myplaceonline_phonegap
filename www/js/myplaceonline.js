@@ -598,11 +598,21 @@ function ensureStyledPage() {
   }
 }
 
-function scrollY(y) {
-  y -= myp.heightPadding;
+function scrollTop(easingType) {
+  scrollY(0, easingType);
+}
+
+// http://easings.net/
+function scrollY(y, easingType) {
+  if (!easingType) {
+    easingType = "easeInSine";
+  }
+  if (y > myp.heightPadding) {
+    y -= myp.heightPadding;
+  }
   $('html, body').stop().animate({
     scrollTop : y
-  }, 650, "easeInOutExpo");
+  }, 650, easingType);
 }
 
 function playSound(audioFile) {
@@ -764,8 +774,8 @@ function ensureClipboard(objects) {
     $("[data-clipboard-text]").click( function(e) {
       window.plugins.clipboard.copy($(this).data("clipboard-text"));
       createSuccessNotification("Copied '" + $(this).data("clipboard-text") + "' to clipboard.");
-      e.preventDefault();
-      return false;
+      //e.preventDefault();
+      return true;
     });
   } else {
     var clipboard_integration = 1;
@@ -786,8 +796,8 @@ function ensureClipboard(objects) {
       $("[data-clipboard-text]").click( function(e) {
         window.ffclipboard.setText($(this).data("clipboard-text"));
         createSuccessNotification("Copied '" + $(this).data("clipboard-text") + "' to clipboard.");
-        e.preventDefault();
-        return false;
+        //e.preventDefault();
+        return true;
       });
     }
   }
