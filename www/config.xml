@@ -8,7 +8,7 @@ http://docs.phonegap.com/en/3.6.0/guide_platforms_android_config.md.html
     <name>myplaceonline</name>
     <description>myplaceonline is a virtual life assistant. https://myplaceonline.com/</description>
     <author email="contact@myplaceonline.com" href="https://myplaceonline.com/">myplaceonline</author>
-    <preference name="phonegap-version" value="cli-5.2.0" /> <!-- http://docs.build.phonegap.com/en_US/configuring_preferences.md.html -->
+    <preference name="phonegap-version" value="cli-5.2.0" />
     <preference name="orientation" value="default" />
     <preference name="target-device" value="universal" />
     <preference name="fullscreen" value="false" />
@@ -26,6 +26,8 @@ http://docs.phonegap.com/en/3.6.0/guide_platforms_android_config.md.html
     <preference name="KeepRunning" value="true" />
     <gap:plugin name="org.apache.cordova.inappbrowser" source="npm" />
     <gap:plugin name="org.apache.cordova.splashscreen" source="npm" />
+    <gap:plugin name="org.apache.cordova.statusbar" source="npm" />
+    <gap:plugin name="org.apache.cordova.device" source="npm" />
     <gap:plugin name="com.verso.cordova.clipboard" source="npm" />
     <icon src="icon.png" />
     <icon gap:platform="android" gap:qualifier="ldpi" src="res/icon/android/icon-36-ldpi.png" />
