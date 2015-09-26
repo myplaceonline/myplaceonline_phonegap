@@ -152,7 +152,7 @@ app = {
   },
 
   loadFailed: function(event, ui) {
-    consoleLog("phonegap loadFailed");
+    consoleLog("phonegap loadFailed " + event + "," + ui);
     consoleDir(event);
     consoleDir(ui);
     event.preventDefault();
