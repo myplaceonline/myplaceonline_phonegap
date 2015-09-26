@@ -157,9 +157,12 @@ app = {
     var activePage = getActivePage();
     if (activePage) {
       if (activePage.id == "phonegapmain") {
-        $("#pgextra").html("<p>Cannot connect to the server.</p><p><a class='ui-btn' id='refresh_button'>Retry</a></p>");
+        $("#pgextra").html("<p>Cannot connect to the server.</p><p><a class='ui-btn' id='refresh_button'>Retry</a></p><a class='ui-btn' id='diagnostics_button'>Show Diagnostics</a></p>");
         $("#refresh_button").click(function() {
           $.mobile.pageContainer.pagecontainer("change", ui.toPage);
+        });
+        $("#diagnostics_button").click(function() {
+          alertHTML();
         });
         var offlineData = getMyplaceonlineSnapshot();
         if (offlineData) {
