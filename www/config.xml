@@ -4,7 +4,7 @@ http://docs.phonegap.com/en/3.6.0/plugin_ref_spec.md.html
 http://docs.phonegap.com/en/3.6.0/config_ref_index.md.html
 http://docs.phonegap.com/en/3.6.0/guide_platforms_android_config.md.html
 -->
-<widget id="com.myplaceonline" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget id="com.myplaceonline" version="1.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>myplaceonline</name>
     <description>myplaceonline is a virtual life assistant. https://myplaceonline.com/</description>
     <author email="contact@myplaceonline.com" href="https://myplaceonline.com/">myplaceonline</author>
@@ -25,8 +25,8 @@ http://docs.phonegap.com/en/3.6.0/guide_platforms_android_config.md.html
     <preference name="android-installLocation" value="auto" />
     <preference name="KeepRunning" value="true" />
     <gap:plugin name="org.apache.cordova.inappbrowser" source="npm" />
-    <gap:plugin name="org.apache.cordova.splashscreen" />
-    <gap:plugin name="com.verso.cordova.clipboard" />
+    <gap:plugin name="org.apache.cordova.splashscreen" source="npm" />
+    <gap:plugin name="com.verso.cordova.clipboard" source="npm" />
     <icon src="icon.png" />
     <icon gap:platform="android" gap:qualifier="ldpi" src="res/icon/android/icon-36-ldpi.png" />
     <icon gap:platform="android" gap:qualifier="mdpi" src="res/icon/android/icon-48-mdpi.png" />
