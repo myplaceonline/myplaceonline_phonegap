@@ -164,7 +164,7 @@ app = {
           $.mobile.pageContainer.pagecontainer("change", ui.toPage);
         });
         $("#diagnostics_button").click(function() {
-          alertHTML();
+          showDebugConsole();
         });
         var offlineData = getMyplaceonlineSnapshot();
         if (offlineData) {
