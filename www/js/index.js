@@ -106,7 +106,7 @@ app = {
   },
 
   loadHomepage: function() {
-    consoleLog("phonegap loadHomepage");
+    consoleLog("phonegap loadHomepage " + app.base_url + "/");
     $("base").attr("href", app.base_url + "/");
     $.mobile.path.documentBase = $.mobile.path.parseUrl(app.base_url + "/");
     app.navigate("/?phonegap=true");
@@ -153,6 +153,8 @@ app = {
 
   loadFailed: function(event, ui) {
     consoleLog("phonegap loadFailed");
+    consoleDir(event);
+    consoleDir(ui);
     event.preventDefault();
     var activePage = getActivePage();
     if (activePage) {
