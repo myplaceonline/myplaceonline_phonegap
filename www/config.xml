@@ -24,7 +24,7 @@ http://docs.phonegap.com/en/3.6.0/guide_platforms_android_config.md.html
     <preference name="android-minSdkVersion" value="7" />
     <preference name="android-installLocation" value="auto" />
     <preference name="KeepRunning" value="true" />
-    <gap:plugin name="org.apache.cordova.inappbrowser" />
+    <gap:plugin name="org.apache.cordova.inappbrowser" version="0.5.2" />
     <gap:plugin name="org.apache.cordova.splashscreen" />
     <gap:plugin name="com.verso.cordova.clipboard" />
     <icon src="icon.png" />
