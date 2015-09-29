@@ -25,10 +25,11 @@ http://docs.phonegap.com/en/3.6.0/guide_platforms_android_config.md.html
     <preference name="android-installLocation" value="auto" />
     <preference name="KeepRunning" value="true" />
     <!-- http://plugins.cordova.io/npm/index.html -->
-    <gap:plugin name="org.apache.cordova.inappbrowser" source="npm" />
-    <gap:plugin name="org.apache.cordova.splashscreen" source="npm" />
-    <gap:plugin name="org.apache.cordova.statusbar" source="npm" />
-    <gap:plugin name="org.apache.cordova.device" source="npm" />
+    <gap:plugin name="cordova-plugin-inappbrowser" source="npm" />
+    <gap:plugin name="cordova-plugin-splashscreen" source="npm" />
+    <gap:plugin name="cordova-plugin-statusbar" source="npm" />
+    <gap:plugin name="cordova-plugin-device" source="npm" />
+    <gap:plugin name="cordova-plugin-whitelist" source="npm" />
     <gap:plugin name="com.verso.cordova.clipboard" source="npm" />
     <icon src="icon.png" />
     <icon gap:platform="android" gap:qualifier="ldpi" src="res/icon/android/icon-36-ldpi.png" />
