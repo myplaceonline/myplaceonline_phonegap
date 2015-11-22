@@ -771,8 +771,11 @@ function ensureClipboard(objects) {
   // check if the user has overriden clipboard integration and use that
   // option or fall back to ZeroClipboard
   if (cordova && cordova.plugins && cordova.plugins.clipboard) {
+    alert('here1');
     $("[data-clipboard-text]").click( function(e) {
+      alert('here2');
       cordova.plugins.clipboard.copy($(this).data("clipboard-text"));
+      alert('here3');
       createSuccessNotification("Copied '" + $(this).data("clipboard-text") + "' to clipboard (c1).");
       //e.preventDefault();
       return true;
