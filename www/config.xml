@@ -15,7 +15,7 @@
 
   <plugin name="cordova-plugin-device" />
   <plugin name="cordova-plugin-inappbrowser" />
-  <plugin name="cordova-plugin-splashscreen-3" />
+  <plugin name="cordova-plugin-splashscreen" />
   <plugin name="cordova-universal-clipboard" />
 
   <!-- https://www.npmjs.com/package/cordova-plugin-whitelist -->

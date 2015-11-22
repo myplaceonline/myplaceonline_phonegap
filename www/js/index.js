@@ -76,9 +76,8 @@ app = {
       navigator.splashscreen.hide();
       if (!app.offline) {
         app.loadHomepage();
-      } else {
       }
-    }, 300);
+    }, 1000);
   },
 
   loadHomepage: function() {
