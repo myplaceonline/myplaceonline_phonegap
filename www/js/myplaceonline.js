@@ -771,13 +771,10 @@ function ensureClipboard(objects) {
   // check if the user has overriden clipboard integration and use that
   // option or fall back to ZeroClipboard
   if (cordova && cordova.plugins && cordova.plugins.clipboard) {
-    alert('here1');
     $("[data-clipboard-text]").click( function(e) {
-      alert('here2');
       cordova.plugins.clipboard.copy($(this).data("clipboard-text"));
-      alert('here3');
-      createSuccessNotification("Copied '" + $(this).data("clipboard-text") + "' to clipboard (c1).");
-      //e.preventDefault();
+      createSuccessNotification("Copied '" + $(this).data("clipboard-text") + "' to clipboard.");
+      e.preventDefault();
       return true;
     });
   } else {
@@ -792,13 +789,13 @@ function ensureClipboard(objects) {
       var clipboard = new ZeroClipboard(objects);
       clipboard.on("ready", function(readyEvent) {
         clipboard.on("aftercopy", function(event) {
-          createSuccessNotification("Copied '" + event.data["text/plain"] + "' to clipboard (c2).");
+          createSuccessNotification("Copied '" + event.data["text/plain"] + "' to clipboard.");
         });
       });
     } else if (clipboard_integration == 2) {
       $("[data-clipboard-text]").click( function(e) {
         window.ffclipboard.setText($(this).data("clipboard-text"));
-        createSuccessNotification("Copied '" + $(this).data("clipboard-text") + "' to clipboard (c3).");
+        createSuccessNotification("Copied '" + $(this).data("clipboard-text") + "' to clipboard.");
         //e.preventDefault();
         return true;
       });
