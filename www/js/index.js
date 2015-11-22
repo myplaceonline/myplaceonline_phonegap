@@ -51,38 +51,18 @@ app = {
 
   onDeviceReady: function() {
     consoleLog("phonegap onDeviceReady");
-    $(document).on('click', 'a.externallink', function(ev) {
+    
+    // If the user click's on an http:// or https:// link, and that link
+    // is not to myplaceonline, then open it in the phone's default external
+    // browser
+    $(document).on('click', 'a', function(ev) {
       try {
         var href = $(this).attr('href');
         if (href) {
-          var options = "location=yes,toolbar=yes";
-          if ($(this).hasClass("noloc")) {
-            // Even though it doesn't look nice, we keep the location bar because otherwise if the user
-            // clicks a link to some external page, there won't be a back button.
-            // options = "location=no,toolbar=no";
+          if ((href.indexOf("http:") == 0 || href.indexOf("https:") == 0) && href.indexOf(app.base_url) != 0) {
+            window.open(href, '_system');
+            return false;
           }
-          if (href.charAt(0) == '/') {
-            href = app.base_url + href;
-          }
-          var popup = window.open(href, '_blank', options);
-          popup.addEventListener("loaderror", function(e) {
-            criticalError("Load error. " + e.message);
-          });
-          popup.addEventListener("loadstart", function(e) {
-            if (e.url.indexOf("phonegapcapture=true") != -1) {
-              var src = e.url.replace("#_=_", "");
-              var q = src.indexOf('?');
-              var uri = src.substring(0, q).replace(app.base_url, "");
-              var params = src.substring(q + 1).replace("&noop=true", "").replace("&phonegapcapture=true", "").replace("phonegapcapture=true", "");
-              if (params.length > 0) {
-                uri = uri + "?" + params;
-              }
-              popup.close();
-              app.navigate(uri);
-            }
-            consoleLog("Popup about to navigate to " + e.url);
-          });
-          return false;
         }
       } catch (clickE) {
         criticalError("External Link Error. " + clickE);
