@@ -43,12 +43,12 @@
     
     <splash qualifier=""           src="splash.png" />
     <splash qualifier="port-ldpi"  src="www/res/screen/android/screen-ldpi-portrait.png" />
-    <splash qualifier="port-mdpi"  src="www/res/screen/android/screen-mdpi-portrait.png" />
-    <splash qualifier="port-hdpi"  src="www/res/screen/android/screen-hdpi-portrait.png" />
-    <splash qualifier="port-xhdpi" src="www/res/screen/android/screen-xhdpi-portrait.png" />
     <splash qualifier="land-ldpi"  src="www/res/screen/android/screen-ldpi-landscape.png" />
+    <splash qualifier="port-mdpi"  src="www/res/screen/android/screen-mdpi-portrait.png" />
     <splash qualifier="land-mdpi"  src="www/res/screen/android/screen-mdpi-landscape.png" />
+    <splash qualifier="port-hdpi"  src="www/res/screen/android/screen-hdpi-portrait.png" />
     <splash qualifier="land-hdpi"  src="www/res/screen/android/screen-hdpi-landscape.png" />
+    <splash qualifier="port-xhdpi" src="www/res/screen/android/screen-xhdpi-portrait.png" />
     <splash qualifier="land-xhdpi" src="www/res/screen/android/screen-xhdpi-landscape.png" />
     
     <allow-intent href="market:*" />
