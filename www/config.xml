@@ -4,8 +4,6 @@
   <description>myplaceonline is a virtual life assistant. https://myplaceonline.com/</description>
   <author email="contact@myplaceonline.com" href="https://myplaceonline.com/">contact@myplaceonline.com</author>
 
-    <gap:plugin name="com.verso.cordova.clipboard" source="npm" />
-    
   <!-- https://github.com/phonegap-build/docs-en/blob/master/configuring/preferences.md -->
   <preference name="phonegap-version" value="cli-5.2.0" />
   <preference name="orientation" value="default" />
