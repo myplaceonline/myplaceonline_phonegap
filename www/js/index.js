@@ -51,11 +51,6 @@ app = {
 
   onDeviceReady: function() {
     consoleLog("phonegap onDeviceReady");
-    if (window.StatusBar) {
-      StatusBar.overlaysWebView(false);
-      //StatusBar.backgroundColorByHexString("#321e15");
-      //StatusBar.styleLightContent();
-    }
     $(document).on('click', 'a.externallink', function(ev) {
       try {
         var href = $(this).attr('href');

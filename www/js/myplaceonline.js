@@ -773,7 +773,7 @@ function ensureClipboard(objects) {
   if (window.plugins && window.plugins.clipboard) {
     $("[data-clipboard-text]").click( function(e) {
       window.plugins.clipboard.copy($(this).data("clipboard-text"));
-      createSuccessNotification("Copied '" + $(this).data("clipboard-text") + "' to clipboard.");
+      createSuccessNotification("Copied '" + $(this).data("clipboard-text") + "' to clipboard (c1).");
       //e.preventDefault();
       return true;
     });
@@ -789,13 +789,13 @@ function ensureClipboard(objects) {
       var clipboard = new ZeroClipboard(objects);
       clipboard.on("ready", function(readyEvent) {
         clipboard.on("aftercopy", function(event) {
-          createSuccessNotification("Copied '" + event.data["text/plain"] + "' to clipboard.");
+          createSuccessNotification("Copied '" + event.data["text/plain"] + "' to clipboard (c2).");
         });
       });
     } else if (clipboard_integration == 2) {
       $("[data-clipboard-text]").click( function(e) {
         window.ffclipboard.setText($(this).data("clipboard-text"));
-        createSuccessNotification("Copied '" + $(this).data("clipboard-text") + "' to clipboard.");
+        createSuccessNotification("Copied '" + $(this).data("clipboard-text") + "' to clipboard (c3).");
         //e.preventDefault();
         return true;
       });

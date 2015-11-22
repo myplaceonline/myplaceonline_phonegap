@@ -1,61 +1,78 @@
-<?xml version='1.0' encoding='utf-8'?>
-<!--
-http://docs.phonegap.com/en/3.6.0/plugin_ref_spec.md.html
-http://docs.phonegap.com/en/3.6.0/config_ref_index.md.html
-http://docs.phonegap.com/en/3.6.0/guide_platforms_android_config.md.html
--->
-<widget id="com.myplaceonline" version="1.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
-    <name>myplaceonline</name>
-    <description>myplaceonline is a virtual life assistant. https://myplaceonline.com/</description>
-    <author email="contact@myplaceonline.com" href="https://myplaceonline.com/">myplaceonline</author>
-    <preference name="phonegap-version" value="cli-5.2.0" />
-    <preference name="orientation" value="default" />
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="com.myplaceonline" version="1.0.1" xmlns="http://www.w3.org/ns/widgets">
+  <name>myplaceonline</name>
+  <description>myplaceonline is a virtual life assistant. https://myplaceonline.com/</description>
+  <author email="contact@myplaceonline.com" href="https://myplaceonline.com/">contact@myplaceonline.com</author>
+
+    <gap:plugin name="com.verso.cordova.clipboard" source="npm" />
+    
+  <!-- https://github.com/phonegap-build/docs-en/blob/master/configuring/preferences.md -->
+  <preference name="phonegap-version" value="cli-5.2.0" />
+  <preference name="orientation" value="default" />
+  <preference name="fullscreen" value="false" />
+  <preference name="webviewbounce" value="true" />
+  <preference name="show-splash-screen-spinner" value="true" />
+  <preference name="auto-hide-splash-screen" value="true" />
+  <preference name="permissions" value="none" />
+  <preference name="KeepRunning" value="true" />
+
+  <splash src="splash.png" />
+  <icon src="icon.png" />
+
+  <plugin name="cordova-plugin-device" />
+  <plugin name="cordova-plugin-inappbrowser" />
+  <plugin name="cordova-plugin-splashscreen-3" />
+  <plugin name="cordova-universal-clipboard" />
+
+  <!-- https://www.npmjs.com/package/cordova-plugin-whitelist -->
+  <plugin name="cordova-plugin-whitelist" />
+  <allow-navigation href="http://*/*" />
+  <allow-navigation href="https://*/*" />
+  <allow-intent href="http://*/*" />
+  <allow-intent href="https://*/*" />
+  <allow-intent href="tel:*" />
+  <allow-intent href="sms:*" />
+  <allow-intent href="mailto:*" />
+  <allow-intent href="geo:*" />
+  <access origin="*" />
+
+  <platform name="android">
+    <preference name="android-installLocation" value="auto" />
+    <preference name="android-minSdkVersion" value="11" />
+    <icon qualifier="ldpi" src="www/res/icon/android/icon-36-ldpi.png" />
+    <icon qualifier="mdpi" src="www/res/icon/android/icon-48-mdpi.png" />
+    <icon qualifier="hdpi" src="www/res/icon/android/icon-72-hdpi.png" />
+    <icon qualifier="xhdpi" src="www/res/icon/android/icon-96-xhdpi.png" />
+    <splash qualifier="port-ldpi" src="www/res/screen/android/screen-ldpi-portrait.png" />
+    <splash qualifier="port-mdpi" src="www/res/screen/android/screen-mdpi-portrait.png" />
+    <splash qualifier="port-hdpi" src="www/res/screen/android/screen-hdpi-portrait.png" />
+    <splash qualifier="port-xhdpi" src="www/res/screen/android/screen-xhdpi-portrait.png" />
+    <allow-intent href="market:*" />
+  </platform>
+  
+  <!--
+  <platform name="ios">
     <preference name="target-device" value="universal" />
-    <preference name="fullscreen" value="false" />
-    <preference name="webviewbounce" value="true" />
     <preference name="prerendered-icon" value="true" />
-    <preference name="stay-in-webview" value="false" />
-    <preference name="ios-statusbarstyle" value="black-opaque" />
     <preference name="detect-data-types" value="true" />
     <preference name="exit-on-suspend" value="false" />
-    <preference name="show-splash-screen-spinner" value="true" />
-    <preference name="auto-hide-splash-screen" value="false" />
-    <preference name="disable-cursor" value="false" />
-    <preference name="android-minSdkVersion" value="7" />
-    <preference name="android-installLocation" value="auto" />
-    <preference name="KeepRunning" value="true" />
-    <!-- http://plugins.cordova.io/npm/index.html -->
-    <gap:plugin name="cordova-plugin-inappbrowser" source="npm" />
-    <gap:plugin name="cordova-plugin-splashscreen" source="npm" />
-    <gap:plugin name="cordova-plugin-statusbar" source="npm" />
-    <gap:plugin name="cordova-plugin-device" source="npm" />
-    <gap:plugin name="cordova-plugin-whitelist" source="npm" />
-    <gap:plugin name="com.verso.cordova.clipboard" source="npm" />
-    <icon src="icon.png" />
-    <icon gap:platform="android" gap:qualifier="ldpi" src="res/icon/android/icon-36-ldpi.png" />
-    <icon gap:platform="android" gap:qualifier="mdpi" src="res/icon/android/icon-48-mdpi.png" />
-    <icon gap:platform="android" gap:qualifier="hdpi" src="res/icon/android/icon-72-hdpi.png" />
-    <icon gap:platform="android" gap:qualifier="xhdpi" src="res/icon/android/icon-96-xhdpi.png" />
-    <icon gap:platform="blackberry" src="res/icon/blackberry/icon-80.png" />
-    <icon gap:platform="blackberry" gap:state="hover" src="res/icon/blackberry/icon-80.png" />
-    <icon gap:platform="ios" height="57" src="res/icon/ios/icon-57.png" width="57" />
-    <icon gap:platform="ios" height="72" src="res/icon/ios/icon-72.png" width="72" />
-    <icon gap:platform="ios" height="114" src="res/icon/ios/icon-57-2x.png" width="114" />
-    <icon gap:platform="ios" height="144" src="res/icon/ios/icon-72-2x.png" width="144" />
-    <icon gap:platform="webos" src="res/icon/webos/icon-64.png" />
-    <icon gap:platform="winphone" src="res/icon/windows-phone/icon-48.png" />
-    <icon gap:platform="winphone" gap:role="background" src="res/icon/windows-phone/icon-173-tile.png" />
-    <gap:splash src="splash.png" />
-    <gap:splash gap:platform="android" gap:qualifier="port-ldpi" src="res/screen/android/screen-ldpi-portrait.png" />
-    <gap:splash gap:platform="android" gap:qualifier="port-mdpi" src="res/screen/android/screen-mdpi-portrait.png" />
-    <gap:splash gap:platform="android" gap:qualifier="port-hdpi" src="res/screen/android/screen-hdpi-portrait.png" />
-    <gap:splash gap:platform="android" gap:qualifier="port-xhdpi" src="res/screen/android/screen-xhdpi-portrait.png" />
-    <gap:splash gap:platform="blackberry" src="res/screen/blackberry/screen-225.png" />
-    <gap:splash gap:platform="ios" height="480" src="res/screen/ios/screen-iphone-portrait.png" width="320" />
-    <gap:splash gap:platform="ios" height="960" src="res/screen/ios/screen-iphone-portrait-2x.png" width="640" />
-    <gap:splash gap:platform="ios" height="1136" src="res/screen/ios/screen-iphone-portrait-568h-2x.png" width="640" />
-    <gap:splash gap:platform="ios" height="1024" src="res/screen/ios/screen-ipad-portrait.png" width="768" />
-    <gap:splash gap:platform="ios" height="768" src="res/screen/ios/screen-ipad-landscape.png" width="1024" />
-    <gap:splash gap:platform="winphone" src="res/screen/windows-phone/screen-portrait.jpg" />
-    <access origin="*" />
+    <icon height="57" src="www/res/icon/ios/icon-57.png" width="57" />
+    <icon height="72" src="www/res/icon/ios/icon-72.png" width="72" />
+    <icon height="114" src="www/res/icon/ios/icon-57-2x.png" width="114" />
+    <icon height="144" src="www/res/icon/ios/icon-72-2x.png" width="144" />
+    <splash height="480" src="www/res/screen/ios/screen-iphone-portrait.png" width="320" />
+    <splash height="960" src="www/res/screen/ios/screen-iphone-portrait-2x.png" width="640" />
+    <splash height="1136" src="www/res/screen/ios/screen-iphone-portrait-568h-2x.png" width="640" />
+    <splash height="1024" src="www/res/screen/ios/screen-ipad-portrait.png" width="768" />
+    <splash height="768" src="www/res/screen/ios/screen-ipad-landscape.png" width="1024" />
+    <allow-intent href="itms:*" />
+    <allow-intent href="itms-apps:*" />
+  </platform>
+  
+  <platform name="winphone">
+    <icon src="www/res/icon/windows-phone/icon-48.png" />
+    <icon role="background" src="www/res/icon/windows-phone/icon-173-tile.png" />
+    <splash src="www/res/screen/windows-phone/screen-portrait.jpg" />
+  </platform>
+  -->
 </widget>
