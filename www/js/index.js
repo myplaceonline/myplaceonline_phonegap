@@ -78,7 +78,7 @@ app = {
         app.loadHomepage();
       } else {
       }
-    }, 1000);
+    }, 300);
   },
 
   loadHomepage: function() {

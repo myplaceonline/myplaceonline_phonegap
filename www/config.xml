@@ -8,11 +8,10 @@
   <preference name="phonegap-version" value="cli-5.2.0" />
   <preference name="orientation" value="default" />
   <preference name="fullscreen" value="false" />
-  <preference name="webviewbounce" value="true" />
-  <preference name="show-splash-screen-spinner" value="true" />
-  <preference name="auto-hide-splash-screen" value="true" />
   <preference name="permissions" value="none" />
   <preference name="KeepRunning" value="true" />
+  <preference name="AutoHideSplashScreen" value="false" />
+  <preference name="SplashMaintainAspectRatio" value="false" />
 
   <plugin name="cordova-plugin-device" />
   <plugin name="cordova-plugin-inappbrowser" />
