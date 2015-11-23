@@ -34,20 +34,20 @@
     <preference name="android-minSdkVersion" value="11" />
     
     <icon qualifier=""      src="icon.png" />
-    <icon qualifier="ldpi"  src="www/res/icon/android/icon-36-ldpi.png" />
-    <icon qualifier="mdpi"  src="www/res/icon/android/icon-48-mdpi.png" />
-    <icon qualifier="hdpi"  src="www/res/icon/android/icon-72-hdpi.png" />
-    <icon qualifier="xhdpi" src="www/res/icon/android/icon-96-xhdpi.png" />
+    <icon qualifier="ldpi"  src="res/icon/android/icon-36-ldpi.png" />
+    <icon qualifier="mdpi"  src="res/icon/android/icon-48-mdpi.png" />
+    <icon qualifier="hdpi"  src="res/icon/android/icon-72-hdpi.png" />
+    <icon qualifier="xhdpi" src="res/icon/android/icon-96-xhdpi.png" />
     
     <splash qualifier=""           src="splash.png" />
-    <splash qualifier="port-ldpi"  src="www/res/screen/android/screen-ldpi-portrait.png" />
-    <splash qualifier="land-ldpi"  src="www/res/screen/android/screen-ldpi-landscape.png" />
-    <splash qualifier="port-mdpi"  src="www/res/screen/android/screen-mdpi-portrait.png" />
-    <splash qualifier="land-mdpi"  src="www/res/screen/android/screen-mdpi-landscape.png" />
-    <splash qualifier="port-hdpi"  src="www/res/screen/android/screen-hdpi-portrait.png" />
-    <splash qualifier="land-hdpi"  src="www/res/screen/android/screen-hdpi-landscape.png" />
-    <splash qualifier="port-xhdpi" src="www/res/screen/android/screen-xhdpi-portrait.png" />
-    <splash qualifier="land-xhdpi" src="www/res/screen/android/screen-xhdpi-landscape.png" />
+    <splash qualifier="port-ldpi"  src="res/screen/android/screen-ldpi-portrait.png" />
+    <splash qualifier="land-ldpi"  src="res/screen/android/screen-ldpi-landscape.png" />
+    <splash qualifier="port-mdpi"  src="res/screen/android/screen-mdpi-portrait.png" />
+    <splash qualifier="land-mdpi"  src="res/screen/android/screen-mdpi-landscape.png" />
+    <splash qualifier="port-hdpi"  src="res/screen/android/screen-hdpi-portrait.png" />
+    <splash qualifier="land-hdpi"  src="res/screen/android/screen-hdpi-landscape.png" />
+    <splash qualifier="port-xhdpi" src="res/screen/android/screen-xhdpi-portrait.png" />
+    <splash qualifier="land-xhdpi" src="res/screen/android/screen-xhdpi-landscape.png" />
     
     <allow-intent href="market:*" />
   </platform>
@@ -58,23 +58,23 @@
     <preference name="prerendered-icon" value="true" />
     <preference name="detect-data-types" value="true" />
     <preference name="exit-on-suspend" value="false" />
-    <icon height="57" src="www/res/icon/ios/icon-57.png" width="57" />
-    <icon height="72" src="www/res/icon/ios/icon-72.png" width="72" />
-    <icon height="114" src="www/res/icon/ios/icon-57-2x.png" width="114" />
-    <icon height="144" src="www/res/icon/ios/icon-72-2x.png" width="144" />
-    <splash height="480" src="www/res/screen/ios/screen-iphone-portrait.png" width="320" />
-    <splash height="960" src="www/res/screen/ios/screen-iphone-portrait-2x.png" width="640" />
-    <splash height="1136" src="www/res/screen/ios/screen-iphone-portrait-568h-2x.png" width="640" />
-    <splash height="1024" src="www/res/screen/ios/screen-ipad-portrait.png" width="768" />
-    <splash height="768" src="www/res/screen/ios/screen-ipad-landscape.png" width="1024" />
+    <icon height="57" src="res/icon/ios/icon-57.png" width="57" />
+    <icon height="72" src="res/icon/ios/icon-72.png" width="72" />
+    <icon height="114" src="res/icon/ios/icon-57-2x.png" width="114" />
+    <icon height="144" src="res/icon/ios/icon-72-2x.png" width="144" />
+    <splash height="480" src="res/screen/ios/screen-iphone-portrait.png" width="320" />
+    <splash height="960" src="res/screen/ios/screen-iphone-portrait-2x.png" width="640" />
+    <splash height="1136" src="res/screen/ios/screen-iphone-portrait-568h-2x.png" width="640" />
+    <splash height="1024" src="res/screen/ios/screen-ipad-portrait.png" width="768" />
+    <splash height="768" src="res/screen/ios/screen-ipad-landscape.png" width="1024" />
     <allow-intent href="itms:*" />
     <allow-intent href="itms-apps:*" />
   </platform>
   
   <platform name="winphone">
-    <icon src="www/res/icon/windows-phone/icon-48.png" />
-    <icon role="background" src="www/res/icon/windows-phone/icon-173-tile.png" />
-    <splash src="www/res/screen/windows-phone/screen-portrait.jpg" />
+    <icon src="res/icon/windows-phone/icon-48.png" />
+    <icon role="background" src="res/icon/windows-phone/icon-173-tile.png" />
+    <splash src="res/screen/windows-phone/screen-portrait.jpg" />
   </platform>
   -->
 </widget>
