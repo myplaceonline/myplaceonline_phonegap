@@ -29,6 +29,14 @@
   <allow-intent href="geo:*" />
   <access origin="*" />
 
+  <!--
+    https://github.com/phonegap/build/issues/97
+    Requires xmlns:gap and xmlns:android
+  -->
+  <gap:config-file platform="android" parent="/manifest">
+    <application android:theme="@android:style/Theme.NoTitleBar"></application>
+  </gap:config-file>
+
   <platform name="android">
     <preference name="android-installLocation" value="auto" />
     <preference name="android-minSdkVersion" value="11" />
@@ -50,14 +58,6 @@
     <splash qualifier="land-xhdpi" src="res/screen/android/screen-xhdpi-landscape.png" />
     
     <allow-intent href="market:*" />
-    
-    <!--
-      https://github.com/phonegap/build/issues/97
-      Requires xmlns:gap and xmlns:android
-    -->
-    <gap:config-file platform="android" parent="/manifest">
-      <application android:theme="@android:style/Theme.NoTitleBar"></application>
-    </gap:config-file>
   </platform>
   
   <!--
