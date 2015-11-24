@@ -50,6 +50,11 @@
     <splash qualifier="land-xhdpi" src="res/screen/android/screen-xhdpi-landscape.png" />
     
     <allow-intent href="market:*" />
+    
+    <!-- https://github.com/phonegap/build/issues/97 -->
+    <config-file parent="/manifest">
+      <application android:theme="@android:style/Theme.NoTitleBar"></application>
+    </config-file>
   </platform>
   
   <!--
