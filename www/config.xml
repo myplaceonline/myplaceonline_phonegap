@@ -16,6 +16,7 @@
   <plugin name="cordova-plugin-inappbrowser" />
   <plugin name="cordova-plugin-splashscreen" />
   <plugin name="cordova-universal-clipboard" />
+  <plugin name="cordova-plugin-geolocation" />
 
   <!-- https://www.npmjs.com/package/cordova-plugin-whitelist -->
   <plugin name="cordova-plugin-whitelist" />
