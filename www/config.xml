@@ -55,7 +55,7 @@
       https://github.com/phonegap/build/issues/97
       Requires xmlns:gap and xmlns:android
     -->
-    <gap:config-file parent="/manifest">
+    <gap:config-file platform="android" parent="/manifest">
       <application android:theme="@android:style/Theme.NoTitleBar"></application>
     </gap:config-file>
   </platform>
