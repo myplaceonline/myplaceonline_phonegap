@@ -59,7 +59,7 @@ app = {
       try {
         var href = $(this).attr('href');
         if (href) {
-          if ((href.indexOf("http:") == 0 || href.indexOf("https:") == 0) && href.indexOf(app.base_url) != 0) {
+          if ($(this).hasClass("externallink") || ((href.indexOf("http:") == 0 || href.indexOf("https:") == 0) && href.indexOf(app.base_url) != 0)) {
             createSuccessNotification("Launching phone browser...");
             window.open(href, '_system');
             return false;
