@@ -21,6 +21,7 @@ app = {
     myp.debug = true;
     consoleLog("phonegap mobileinit");
     app.savePhonegapPath();
+    window.CKEDITOR_BASEPATH = app.base_url + "/assets/ckeditor/";
     $.support.cors = true;
     $.mobile.allowCrossDomainPages = true;
     $.mobile.defaultPageTransition = "none";
