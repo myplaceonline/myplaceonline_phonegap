@@ -18,17 +18,17 @@ app = {
   mobileinit: function() {
     // We always set debug to true to capture the initial set of console logs in case there's a problem,
     // but in most cases when the homepage comes in, it will disable debug
-    myp.debug = true;
-    consoleLog("phonegap mobileinit");
+    myplaceonline.setDebug(true);
+    myplaceonline.consoleLog("phonegap mobileinit");
     app.savePhonegapPath();
     window.CKEDITOR_BASEPATH = app.base_url + "/assets/ckeditor/";
     $.support.cors = true;
     $.mobile.allowCrossDomainPages = true;
     $.mobile.defaultPageTransition = "none";
-    myp.allowFocusPlaceholder = false;
-    myp.inPhoneGap = true;
+    myplaceonline.setFocusAllowed(false);
+    myplaceonline.setInPhonegap(true);
     $(document).on("pagecontainerchangefailed.phonegap", app.loadFailed);
-    pageloaded("phonegapmain", app.initialpageloaded);
+    myplaceonline.pageloaded("phonegapmain", app.initialpageloaded);
   },
 
   savePhonegapPath: function() {
@@ -38,7 +38,7 @@ app = {
   },
 
   initialpageloaded: function() {
-    consoleLog("phonegap initialpageloaded");
+    myplaceonline.consoleLog("phonegap initialpageloaded");
     app.bindEvents();
   },
 
@@ -51,7 +51,7 @@ app = {
   },
 
   onDeviceReady: function() {
-    consoleLog("phonegap onDeviceReady");
+    myplaceonline.consoleLog("phonegap onDeviceReady");
     
     // If the user click's on an http:// or https:// link, and that link
     // is not to myplaceonline, then open it in the phone's default external
@@ -61,13 +61,13 @@ app = {
         var href = $(this).attr('href');
         if (href) {
           if ($(this).hasClass("externallink") || ((href.indexOf("http:") == 0 || href.indexOf("https:") == 0) && href.indexOf(app.base_url) != 0)) {
-            createSuccessNotification("Launching phone browser...");
+            myplaceonline.createSuccessNotification("Launching phone browser...");
             window.open(href, '_system');
             return false;
           }
         }
       } catch (clickE) {
-        criticalError("External Link Error. " + clickE);
+        myplaceonline.criticalError("External Link Error. " + clickE);
       }
       return true;
     });
@@ -82,14 +82,14 @@ app = {
   },
 
   loadHomepage: function() {
-    consoleLog("phonegap loadHomepage " + app.base_url + "/");
+    myplaceonline.consoleLog("phonegap loadHomepage " + app.base_url + "/");
     $("base").attr("href", app.base_url + "/");
     $.mobile.path.documentBase = $.mobile.path.parseUrl(app.base_url + "/");
     app.navigate("/?phonegap=true");
   },
 
   navigate: function(url) {
-    consoleLog("phonegap navigate " + url);
+    myplaceonline.consoleLog("phonegap navigate " + url);
     $.mobile.pageContainer.pagecontainer("change", url, {
       allowSamePageTransition: true,
       transition: 'none',
@@ -99,9 +99,9 @@ app = {
   },
 
   onBackButton: function() {
-    consoleLog("phonegap onBackButton");
+    myplaceonline.consoleLog("phonegap onBackButton");
 
-    if (!myp.isInitialPhonegapPage || window.location.hash.indexOf("ui-state=dialog") != -1) {
+    if (!myplaceonline.isInitialPhonegapPage() || window.location.hash.indexOf("ui-state=dialog") != -1) {
       window.history.go(-1);
     } else {
       app.close();
@@ -109,10 +109,10 @@ app = {
   },
 
   onMenuButton: function() {
-    consoleLog("phonegap onMenuButton");
+    myplaceonline.consoleLog("phonegap onMenuButton");
     var hmPopupSel = "#headerMenuPopup";
     var optPopupSel = "#menuPopup";
-    var p = getActivePage();
+    var p = myplaceonline.getActivePage();
     if (p) {
       var uid = $(p).attr('data-uniqueid');
       if (uid) {
@@ -128,11 +128,11 @@ app = {
   },
 
   loadFailed: function(event, ui) {
-    consoleLog("phonegap loadFailed " + event + "," + ui);
-    consoleDir(event);
-    consoleDir(ui);
+    myplaceonline.consoleLog("phonegap loadFailed " + event + "," + ui);
+    myplaceonline.consoleDir(event);
+    myplaceonline.consoleDir(ui);
     event.preventDefault();
-    var activePage = getActivePage();
+    var activePage = myplaceonline.getActivePage();
     if (activePage) {
       if (activePage.id == "phonegapmain") {
         $("#pgextra").html("<p>Cannot connect to the server.</p><p><a class='ui-btn' id='refresh_button'>Retry</a></p><a class='ui-btn' id='diagnostics_button'>Show Diagnostics</a></p>");
@@ -140,13 +140,13 @@ app = {
           $.mobile.pageContainer.pagecontainer("change", ui.toPage);
         });
         $("#diagnostics_button").click(function() {
-          showDebugConsole();
+          myplaceonline.showDebugConsole();
         });
-        var offlineData = getMyplaceonlineSnapshot();
+        var offlineData = myplaceonline.getMyplaceonlineSnapshot();
         if (offlineData) {
           $("#pgextra").append("<p>There is also an offline snapshot created at " + offlineData.time + "</p><p><a class='ui-btn' id='offline_button'>Load Offline Snapshot</a></p>");
           $("#offline_button").click(function(e) {
-            var offlineData = getMyplaceonlineSnapshot();
+            var offlineData = myplaceonline.getMyplaceonlineSnapshot();
             if (offlineData) {
               navigate(app.phonegapHomepage.replace("index.html", "offline.html"), true);
             }
@@ -154,7 +154,7 @@ app = {
             return false;
           });
         }
-        ensureStyledPage();
+        myplaceonline.ensureStyledPage();
       } else {
         // This could have just been a network blip and JQM will show an error popup and then the user can
         // try again
@@ -164,7 +164,7 @@ app = {
     } else {
       alert("Cannot connect to the server. Please reload the application.");
     }
-    hideLoading();
+    myplaceonline.hideLoading();
   },
 
   isAndroid: function() {
@@ -181,7 +181,7 @@ app = {
       app.firstLoad = false;
 
       setTimeout(function() {
-        var activePage = getActivePage();
+        var activePage = myplaceonline.getActivePage();
         if (activePage) {
           if (activePage.id == "phonegapmain") {
             alert("We're very sorry, but you hit a known issue that we haven't figured out yet. Please click Send Details to help us figure it out, then terminate the app and restart. Sorry.");
@@ -190,7 +190,7 @@ app = {
               var button = document.createElement("button");
               button.innerHTML = "Send Details";
               button.onclick = function() {
-                sendDebug();
+                myplaceonline.sendDebug();
                 window.setTimeout(function() {
                   alert("Thank you for providing details. Please re-open the app and try again.");
                   app.close();
@@ -211,7 +211,7 @@ app = {
   // "Never quit an iOS app programmatically."
   // https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/MobileHIG/MobileHIG.pdf
   close: function() {
-    consoleLog("app close called!");
+    myplaceonline.consoleLog("app close called!");
 
     if (!app.isiOS()) {
       if (navigator.app) {
