@@ -5,7 +5,7 @@
   <author email="contact@myplaceonline.com" href="https://myplaceonline.com/">contact@myplaceonline.com</author>
 
   <!-- https://github.com/phonegap-build/docs-en/blob/master/configuring/preferences.md -->
-  <preference name="phonegap-version" value="cli-5.2.0" />
+  <preference name="phonegap-version" value="cli-5.4.1" />
   <preference name="orientation" value="default" />
   <preference name="fullscreen" value="false" />
   <preference name="permissions" value="none" />
