@@ -4,6 +4,12 @@
   <description>myplaceonline is a virtual life assistant. https://myplaceonline.com/</description>
   <author email="contact@myplaceonline.com" href="https://myplaceonline.com/">contact@myplaceonline.com</author>
 
+  <plugin name="cordova-plugin-device" />
+  <plugin name="cordova-plugin-inappbrowser" />
+  <plugin name="cordova-plugin-splashscreen" />
+  <plugin name="cordova-universal-clipboard" />
+  <plugin name="cordova-plugin-geolocation" />
+
   <!-- https://github.com/phonegap-build/docs-en/blob/master/configuring/preferences.md -->
   <preference name="phonegap-version" value="cli-5.4.1" />
   <preference name="orientation" value="default" />
@@ -11,12 +17,8 @@
   <preference name="permissions" value="none" />
   <preference name="KeepRunning" value="true" />
   <preference name="AutoHideSplashScreen" value="false" />
-
-  <plugin name="cordova-plugin-device" />
-  <plugin name="cordova-plugin-inappbrowser" />
-  <plugin name="cordova-plugin-splashscreen" />
-  <plugin name="cordova-universal-clipboard" />
-  <plugin name="cordova-plugin-geolocation" />
+  <preference name="FadeSplashScreen" value="false" />
+  <preference name="ShowSplashScreenSpinner" value="false" />
 
   <!-- https://www.npmjs.com/package/cordova-plugin-whitelist -->
   <plugin name="cordova-plugin-whitelist" />
