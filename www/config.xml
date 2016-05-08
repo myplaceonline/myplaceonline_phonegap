@@ -11,6 +11,7 @@
   <plugin name="cordova-plugin-geolocation" />
 
   <!-- https://github.com/phonegap-build/docs-en/blob/master/configuring/preferences.md -->
+  <!-- https://build.phonegap.com/current-support -->
   <preference name="phonegap-version" value="cli-5.4.1" />
   <preference name="orientation" value="default" />
   <preference name="fullscreen" value="false" />
