@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <widget id="com.myplaceonline" version="1.0.10" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
   <name>myplaceonline</name>
-  <description>myplaceonline is a virtual life assistant. https://myplaceonline.com/</description>
+  <description>myplaceonline is a joy and meaning maximizer. https://myplaceonline.com/</description>
   <author email="contact@myplaceonline.com" href="https://myplaceonline.com/">contact@myplaceonline.com</author>
 
   <plugin name="cordova-plugin-device" />
@@ -43,7 +43,7 @@
 
   <platform name="android">
     <preference name="android-installLocation" value="auto" />
-    <preference name="android-minSdkVersion" value="11" />
+    <preference name="android-minSdkVersion" value="16" />
     
     <icon qualifier=""      src="icon.png" />
     <icon qualifier="ldpi"  src="res/icon/android/icon-36-ldpi.png" />
