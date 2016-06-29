@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="description" content="myplaceonline is a virtual life assistant.">
+    <meta name="keywords" content="myplaceonline, virtual life assistant, life coach, organizer, passwords">
+    <meta name="Owner" content="contact@myplaceonline.com">
+    <meta name="DC.Language" content="en-US">
+    <meta name="Country" content="US">
+    <meta name="Robots" content="index,follow">
+    <meta http-equiv="Content-Language" content="en_US">
+    <title>myplaceonline</title>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="device.js"></script>
+    <script type="text/javascript" src="InAppBrowser.js"></script>
+    <script type="text/javascript" src="clipboard.js"></script>
+    <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css">
+    <script src="js/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="js/myplaceonline.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript">
+      app.offline = true;
+      $(document).on("mobileinit.phonegapmobileinit", app.mobileinit);
+    </script>
+    <script src="js/jquery.mobile-1.4.5.min.js"></script>
+    <script type="text/javascript" src="js/handlebars-v2.0.0.js"></script>
+    <script type="text/javascript" src="js/ember-1.9.0.js"></script>
+    <script type="text/javascript" src="js/forge.min.js"></script>
+  </head>
+  <body>
+    <div id="phonegapmain" data-uniqueid="phonegapmain" data-role="page">
+      <div data-role="header">
+        <h1>myplaceonline</h1>
+      </div>
+      <div role="main" class="ui-content">
+        <div id="emberContainer"></div>
+
+        <script type="text/x-handlebars">
+          {{outlet}}
+        </script>
+
+        <script type="text/x-handlebars" data-template-name="index">
+          <ul data-role="listview" data-inset="true">
+          {{#each category in categories}}
+            <li>{{#link-to category.link}}{{category.title}} <span class="ui-li-count">{{category.count}}</span>{{/link-to}}</li>
+          {{/each}}
+          </ul>
+        </script>
+
+        <script type="text/x-handlebars" data-template-name="passwords">
+          <ul data-role="listview" data-inset="true" data-filter="true">
+          {{#each password in model}}
+            <li>{{#link-to "password" password}}{{password.name}} ({{password.user}}){{/link-to}}</li>
+          {{/each}}
+          </ul>
+        </script>
+
+        <script type="text/x-handlebars" data-template-name="password">
+          <h1>{{model.name}}</h1>
+          <p>User: {{model.user}}</p>
+          <p>Password: {{password}}</p>
+          <p>Account: {{model.account_number}}</p>
+          <p>Notes: {{model.notes}}</p>
+          <p>URL: {{model.url}}</p>
+        </script>
+
+        <script type="text/javascript">
+        myplaceonline.onPageLoad(function() {
+          if (window.localStorage) {
+            window.appsnapshot = myplaceonline.getMyplaceonlineSnapshot();
+            if (window.appsnapshot) {
+              window.App = Ember.Application.create({
+                rootElement: '#emberContainer',
+                ready: function() {
+                  $.mobile.window.unbind({ 
+                    "popstate.history": $.proxy( this.popstate, this ),
+                    "hashchange.history": $.proxy( this.hashchange, this )
+                  });
+                  $.mobile.changePage = function() {};
+                  $.mobile.ajaxEnabled = false;
+                  $.mobile.pushStateEnabled = false;
+                  $.mobile.linkBindingEnabled = false;
+                  $.mobile.hashListeningEnabled = false;
+                }
+              });
+              
+              App.Router.reopen({
+                rootURL: '/offline/'
+              });
+              
+              App.IndexRoute = Ember.Route.extend({
+                setupController: function(controller, model) {
+                  var categories = [];
+                  $.each(model.categories, function(i, x) {
+                    if (x.parent_id > 0) {
+                      categories.push(x);
+                    }
+                  });
+                  controller.set("model", model);
+                  controller.set("categories", categories);
+                },
+                model: function() {
+                  return window.appsnapshot;
+                }
+              });
+              
+              App.IndexView = Ember.View.extend({
+                didInsertElement : function() {
+                  myplaceonline.ensureStyledPage();
+                }
+              });
+
+              App.PasswordsRoute = Ember.Route.extend({
+                model: function() {
+                  return window.appsnapshot.user.primary_identity.passwords;
+                }
+              });
+              
+              App.PasswordsView = Ember.View.extend({
+                didInsertElement : function() {
+                  myplaceonline.ensureStyledPage();
+                }
+              });
+
+              App.PasswordRoute = Ember.Route.extend({
+                setupController: function(controller, model) {
+                  var password = null;
+                  if (model.password_encrypted_id) {
+                    var sessionPassword = myplaceonline.getSessionPassword();
+                    var encrypted_value = null;
+                    $.each(window.appsnapshot.user.encrypted_values, function(i, x) {
+                      if (x.id == model.password_encrypted_id) {
+                        encrypted_value = x;
+                        return false;
+                      }
+                    });
+                    if (encrypted_value) {
+                      var salt = forge.util.decode64(encrypted_value.salt);
+                      var key = forge.pkcs5.pbkdf2(sessionPassword, salt, 65536, 32);
+                      var val = forge.util.decode64(encrypted_value.val);
+                      
+                      var i = val.indexOf("--");
+                      var data = forge.util.decode64(val.substring(0, i));
+                      var digest = val.substring(i + 2);
+                      // TODO verify digest (message_verifier.rb secure_compare)
+                      
+                      i = data.indexOf("--");
+                      var encrypted_data = forge.util.decode64(data.substring(0, i));
+                      var iv = forge.util.decode64(data.substring(i + 2));
+
+                      var decipher = forge.cipher.createDecipher('AES-CBC', key);
+                      decipher.start({iv: iv});
+                      decipher.update(forge.util.createBuffer(encrypted_data));
+                      if (decipher.finish()) {
+                        password = decipher.output.toString();
+                      } else {
+                        password = "Invalid password or other decryption error.";
+                        window.sessionPassword = null;
+                      }
+                    }
+                  } else {
+                    password = model.password;
+                  }
+                  controller.set("model", model);
+                  controller.set("password", password);
+                },
+                model: function(params) {
+                  var result = null;
+                  $.each(window.appsnapshot.user.primary_identity.passwords, function(i, x) {
+                    if (x.id == params.id) {
+                      result = x;
+                      return false;
+                    }
+                  });
+                  return result;
+                }
+              });
+              
+              App.Router.map(function() {
+                this.resource('passwords');
+                this.resource('password', { path: '/password/:id' });
+              });
+            }
+          }
+        });
+        </script>
+      </div>
+    </div>
+  </body>
+</html>

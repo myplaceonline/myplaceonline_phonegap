@@ -1,0 +1,79 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "cordova-plugin-battery-status": {
+            "PACKAGE_NAME": "com.myplaceonline"
+        },
+        "cordova-plugin-camera": {
+            "PACKAGE_NAME": "com.myplaceonline"
+        },
+        "cordova-plugin-console": {
+            "PACKAGE_NAME": "com.myplaceonline"
+        },
+        "cordova-plugin-contacts": {
+            "PACKAGE_NAME": "com.myplaceonline"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.myplaceonline"
+        },
+        "cordova-plugin-device-motion": {
+            "PACKAGE_NAME": "com.myplaceonline"
+        },
+        "cordova-plugin-device-orientation": {
+            "PACKAGE_NAME": "com.myplaceonline"
+        },
+        "cordova-plugin-dialogs": {
+            "PACKAGE_NAME": "com.myplaceonline"
+        },
+        "cordova-plugin-file-transfer": {
+            "PACKAGE_NAME": "com.myplaceonline"
+        },
+        "cordova-plugin-geolocation": {
+            "PACKAGE_NAME": "com.myplaceonline"
+        },
+        "cordova-plugin-globalization": {
+            "PACKAGE_NAME": "com.myplaceonline"
+        },
+        "cordova-plugin-inappbrowser": {
+            "PACKAGE_NAME": "com.myplaceonline"
+        },
+        "cordova-plugin-media": {
+            "PACKAGE_NAME": "com.myplaceonline"
+        },
+        "cordova-plugin-media-capture": {
+            "PACKAGE_NAME": "com.myplaceonline"
+        },
+        "cordova-plugin-network-information": {
+            "PACKAGE_NAME": "com.myplaceonline"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "com.myplaceonline"
+        },
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "com.myplaceonline"
+        },
+        "cordova-plugin-vibration": {
+            "PACKAGE_NAME": "com.myplaceonline"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.myplaceonline"
+        },
+        "cordova-universal-clipboard": {
+            "PACKAGE_NAME": "com.myplaceonline"
+        }
+    },
+    "dependent_plugins": {
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "com.myplaceonline"
+        },
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "com.myplaceonline"
+        }
+    }
+}
