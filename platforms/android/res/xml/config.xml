@@ -91,7 +91,6 @@
     <author email="contact@myplaceonline.com" href="https://myplaceonline.com/">contact@myplaceonline.com</author>
     <content src="index.html" />
     <icon src="icon.png" />
-    <splash src="splash.png" />
     <preference name="phonegap-version" value="cli-5.4.1" />
     <preference name="orientation" value="default" />
     <preference name="fullscreen" value="false" />
