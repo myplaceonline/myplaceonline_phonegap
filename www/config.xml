@@ -6,6 +6,7 @@
   
   <content src="index.html" />
   <icon src="icon.png" />
+  <splash src="splash.png" />
   
   <plugin name="cordova-plugin-device" source="npm" />
   <plugin name="cordova-plugin-inappbrowser" source="npm" />
