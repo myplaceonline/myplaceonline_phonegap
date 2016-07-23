@@ -50,8 +50,9 @@
     <preference name="android-installLocation" value="auto" />
     <preference name="android-minSdkVersion" value="16" />
     
-    <!-- Could not get icons to package properly -->
     <!--
+    Could not get icons to package properly
+    
     <icon qualifier="ldpi" src="res/icon/android/drawable-ldpi-icon.png" />
     <icon qualifier="mdpi" src="res/icon/android/drawable-mdpi-icon.png" />
     <icon qualifier="hdpi" src="res/icon/android/drawable-hdpi-icon.png" />
