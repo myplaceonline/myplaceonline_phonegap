@@ -51,7 +51,7 @@ app = {
   },
 
   onDeviceReady: function() {
-    myplaceonline.consoleLog("phonegap onDeviceReady");
+    myplaceonline.consoleLog("phonegap onDeviceReady, splashscreen: " + navigator.splashscreen);
     
     // If the user click's on an http:// or https:// link, and that link
     // is not to myplaceonline, then open it in the phone's default external
@@ -62,7 +62,7 @@ app = {
         if (href) {
           if ($(this).hasClass("externallink") || ((href.indexOf("http:") == 0 || href.indexOf("https:") == 0) && href.indexOf(app.base_url) != 0)) {
             myplaceonline.createSuccessNotification("Launching phone browser...");
-            window.open(href, '_system');
+            cordova.InAppBrowser.open(href, '_system');
             return false;
           }
         }
