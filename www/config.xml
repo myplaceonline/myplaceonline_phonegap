@@ -14,6 +14,7 @@
   <plugin name="cordova-universal-clipboard" source="npm" />
   <plugin name="cordova-plugin-geolocation" source="npm" />
   <plugin name="cordova-plugin-camera" source="npm" />
+  <plugin name="cordova-plugin-file" source="npm" />
   
   <!-- https://github.com/phonegap-build/docs-en/blob/master/configuring/preferences.md -->
   <!-- https://build.phonegap.com/current-support -->

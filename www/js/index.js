@@ -62,7 +62,7 @@ app = {
         if (href) {
           if ($(this).hasClass("externallink") || ((href.indexOf("http:") == 0 || href.indexOf("https:") == 0) && href.indexOf(app.base_url) != 0)) {
             myplaceonline.createSuccessNotification("Launching phone browser...");
-            cordova.InAppBrowser.open(href, '_system');
+            cordova.InAppBrowser.open(href, "_system");
             return false;
           }
         }
