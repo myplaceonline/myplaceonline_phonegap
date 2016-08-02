@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.myplaceonline" version="1.0.12" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+<widget id="com.myplaceonline" version="1.0.11" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
   <name>myplaceonline</name>
   <description>myplaceonline is a joy and meaning maximizer. https://myplaceonline.com/</description>
   <author email="contact@myplaceonline.com" href="https://myplaceonline.com/">contact@myplaceonline.com</author>
