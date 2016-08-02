@@ -359,7 +359,27 @@ var myplaceonline = function(mymodule) {
     }
     return null;
   }
-
+  
+  function prepareNewContent($element) {
+    if ($element) {
+      $element.trigger("create");
+    }
+    if (inPhoneGap) {
+      var process = null;
+      if ($element) {
+        process = $element.find("input:file");
+      } else {
+        process = $("input:file");
+      }
+      process.each(function(index) {
+        var $this = $(this);
+        if ($this.data("useprogress")) {
+          $("<button class='take_picture_button ui-btn'>Take Picture</button>").insertAfter($this);
+        }
+      });
+    }
+  }
+  
   // http://api.jquerymobile.com/global-config/
   $(document).on("mobileinit.myp", function() {
     consoleLog("mobileinit.myp");
@@ -410,14 +430,7 @@ var myplaceonline = function(mymodule) {
         }
       }
       
-      if (inPhoneGap) {
-        $("input:file").each(function(index) {
-          var jFile = $(this);
-          if (jFile.data("useprogress")) {
-            $("<button class='take_picture_button ui-btn'>Take Picture</button>").insertAfter(jFile);
-          }
-        });
-      }
+      prepareNewContent(null);
     });
 
     $(document).on("click", ".take_picture_button", function(e) {
@@ -434,6 +447,8 @@ var myplaceonline = function(mymodule) {
                 consoleLog("Got File object");
                 consoleDir(file);
                 // See http://stackoverflow.com/questions/38688006/why-doesnt-formdata-append-file-from-fileentry-upload-correctly
+                $uploading = $("<p>Uploading...</p>");
+                $uploading.insertAfter($takePictureButton);
                 $takePictureButton.hide();
                 prepareUploadFiles($inputFileElement, 1);
                 //uploadFile(file, $inputFileElement);
@@ -450,12 +465,14 @@ var myplaceonline = function(mymodule) {
                   fileURI,
                   encodeURI(app.base_url + "/api/newfile"),
                   function(result) {
+                    $uploading.remove();
                     var resultObj = jQuery.parseJSON(result.response);
                     consoleDir(resultObj);
                     uploadFileSuccess(resultObj, null, $inputFileElement);
                     uploadFileAlways($inputFileElement);
                   },
                   function(error) {
+                    $uploading.remove();
                     consoleDir(error);
                     criticalError("Could not upload file: " + error.body);
                     consoleLog("upload error source " + error.source);
@@ -1140,6 +1157,7 @@ var myplaceonline = function(mymodule) {
   mymodule.uploadFile = uploadFile;
   mymodule.nextUniqueId = nextUniqueId;
   mymodule.encodeEntities = encodeEntities;
+  mymodule.prepareNewContent = prepareNewContent;
 
   mymodule.isFocusAllowed = function() {
     return allowFocusPlaceholder;
