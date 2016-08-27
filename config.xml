@@ -81,6 +81,9 @@
     <preference name="prerendered-icon" value="true" />
     <preference name="detect-data-types" value="true" />
     <preference name="exit-on-suspend" value="false" />
+    <preference name="StatusBarOverlaysWebView" value="false" />
+    <preference name="StatusBarBackgroundColor" value="#000000" />
+    <preference name="StatusBarStyle" value="lightcontent" />
     <preference name="FadeSplashScreenDuration" value="0"/>
 
     <icon height="57" platform="ios" src="res/icon/ios/icon.png" width="57" />
