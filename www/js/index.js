@@ -51,7 +51,6 @@ app = {
   },
 
   onDeviceReady: function() {
-    alert('deviceready');
     myplaceonline.consoleLog("phonegap onDeviceReady, splashscreen: " + navigator.splashscreen);
     
     // If the user click's on an http:// or https:// link, and that link
@@ -75,11 +74,6 @@ app = {
     app.isDeviceReady = true;
     // Hack: If we call splashcreen.hide immediately, there's a blank flash in between
     setTimeout(function() {
-      /*if (StatusBar) {
-        StatusBar.overlaysWebView(false);
-        StatusBar.styleBlackTranslucent();
-        StatusBar.show();
-      }*/
       navigator.splashscreen.hide();
       if (!app.offline) {
         app.loadHomepage();
