@@ -6,7 +6,6 @@
   
   <content src="index.html" />
   <icon src="icon.png" />
-  <splash src="splash.png" />
   
   <plugin name="cordova-plugin-device" source="npm" />
   <plugin name="cordova-plugin-inappbrowser" source="npm" />
@@ -14,12 +13,10 @@
   <plugin name="cordova-universal-clipboard" source="npm" />
   <plugin name="cordova-plugin-geolocation" source="npm" />
   <plugin name="cordova-plugin-camera" source="npm" />
-  <plugin name="cordova-plugin-file" source="npm" />
-  <plugin name="cordova-plugin-file-transfer" source="npm" />
   
   <!-- https://github.com/phonegap-build/docs-en/blob/master/configuring/preferences.md -->
   <!-- https://build.phonegap.com/current-support -->
-  <preference name="phonegap-version" value="cli-6.3.0" />
+  <preference name="phonegap-version" value="cli-5.4.1" />
   <preference name="orientation" value="default" />
   <preference name="fullscreen" value="false" />
   <preference name="permissions" value="none" />
@@ -52,9 +49,8 @@
     <preference name="android-installLocation" value="auto" />
     <preference name="android-minSdkVersion" value="16" />
     
+    <!-- Could not get icons to package properly -->
     <!--
-    Could not get icons to package properly
-    
     <icon qualifier="ldpi" src="res/icon/android/drawable-ldpi-icon.png" />
     <icon qualifier="mdpi" src="res/icon/android/drawable-mdpi-icon.png" />
     <icon qualifier="hdpi" src="res/icon/android/drawable-hdpi-icon.png" />
@@ -79,7 +75,6 @@
     <allow-intent href="market:*" />
   </platform>
   
-  <!--
   <platform name="ios">
     <preference name="target-device" value="universal" />
     <preference name="prerendered-icon" value="true" />
@@ -117,6 +112,7 @@
     <allow-intent href="itms-apps:*" />
   </platform>
   
+  <!--
   <platform name="wp8">
     <icon height="99" platform="wp8" src="res/icon/wp8/ApplicationIcon.png" width="99" />
     <icon height="159" platform="wp8" src="res/icon/wp8/Background.png" width="159" />
