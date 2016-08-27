@@ -18,6 +18,7 @@ app = {
   mobileinit: function() {
     // We always set debug to true to capture the initial set of console logs in case there's a problem,
     // but in most cases when the homepage comes in, it will disable debug
+    alert('herea');
     myplaceonline.setDebug(true);
     myplaceonline.consoleLog("phonegap mobileinit");
     app.savePhonegapPath();
@@ -25,10 +26,12 @@ app = {
     $.support.cors = true;
     $.mobile.allowCrossDomainPages = true;
     $.mobile.defaultPageTransition = "none";
+    alert('hereb');
     myplaceonline.setFocusAllowed(false);
     myplaceonline.setInPhonegap(true);
     $(document).on("pagecontainerchangefailed.phonegap", app.loadFailed);
     myplaceonline.pageloaded("phonegapmain", app.initialpageloaded);
+    alert('herec');
   },
 
   savePhonegapPath: function() {
@@ -40,6 +43,7 @@ app = {
   initialpageloaded: function() {
     myplaceonline.consoleLog("phonegap initialpageloaded");
     app.bindEvents();
+    alert('hered');
   },
 
   // Bind any events that are required on startup. Common events are:
@@ -51,6 +55,7 @@ app = {
   },
 
   onDeviceReady: function() {
+    alert('heref');
     myplaceonline.consoleLog("phonegap onDeviceReady, splashscreen: " + navigator.splashscreen);
     
     // If the user click's on an http:// or https:// link, and that link
@@ -137,6 +142,7 @@ app = {
   },
 
   loadFailed: function(event, ui) {
+    alert('heree');
     myplaceonline.consoleLog("phonegap loadFailed " + event + "," + ui);
     myplaceonline.consoleDir(event);
     myplaceonline.consoleDir(ui);
