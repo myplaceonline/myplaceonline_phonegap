@@ -89,6 +89,7 @@
     <preference name="FadeSplashScreenDuration" value="0"/>
 
     <icon height="57" platform="ios" src="res/icon/ios/icon.png" width="57" />
+    <icon height="72" platform="ios" src="res/icon/ios/icon-72.png" width="72" />
 
     <!--
     <icon height="57" platform="ios" src="res/icon/ios/icon.png" width="57" />
