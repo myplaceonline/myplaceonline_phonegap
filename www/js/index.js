@@ -49,9 +49,10 @@ app = {
   // Bind any events that are required on startup. Common events are:
   // 'load', 'deviceready', 'offline', and 'online'.
   bindEvents: function() {
+    alert('herebind');
     document.addEventListener("deviceready", app.onDeviceReady, false);
-    document.addEventListener("backbutton", app.onBackButton, false);
-    document.addEventListener("menubutton", app.onMenuButton, false);
+    //document.addEventListener("backbutton", app.onBackButton, false);
+    //document.addEventListener("menubutton", app.onMenuButton, false);
   },
 
   onDeviceReady: function() {
