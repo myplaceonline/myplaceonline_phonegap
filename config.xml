@@ -15,6 +15,7 @@
   <plugin name="cordova-plugin-camera" source="npm" />
   <plugin name="cordova-plugin-statusbar" source="npm" />
   <plugin name="cordova-plugin-file" source="npm" />
+  <plugin name="cordova-plugin-file-transfer" source="npm" />
   
   <!-- https://github.com/phonegap-build/docs-en/blob/master/configuring/preferences.md -->
   <!-- https://build.phonegap.com/current-support -->
