@@ -72,8 +72,10 @@ app = {
       return true;
     });
     app.isDeviceReady = true;
+    alert('here1');
     // Hack: If we call splashcreen.hide immediately, there's a blank flash in between
     setTimeout(function() {
+      alert('here2');
       if (StatusBar) {
         StatusBar.overlaysWebView(false);
         StatusBar.styleBlackTranslucent();
