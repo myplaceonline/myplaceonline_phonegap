@@ -74,8 +74,10 @@ app = {
     app.isDeviceReady = true;
     // Hack: If we call splashcreen.hide immediately, there's a blank flash in between
     setTimeout(function() {
-      if (StatusBar && StatusBar.overlaysWebView) {
+      if (StatusBar) {
         StatusBar.overlaysWebView(false);
+        StatusBar.styleBlackTranslucent();
+        StatusBar.show();
       }
       navigator.splashscreen.hide();
       if (!app.offline) {
