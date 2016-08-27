@@ -13,6 +13,7 @@
   <plugin name="cordova-universal-clipboard" source="npm" />
   <plugin name="cordova-plugin-geolocation" source="npm" />
   <plugin name="cordova-plugin-camera" source="npm" />
+  <plugin name="cordova-plugin-statusbar" source="npm" />
   
   <!-- https://github.com/phonegap-build/docs-en/blob/master/configuring/preferences.md -->
   <!-- https://build.phonegap.com/current-support -->
@@ -80,6 +81,7 @@
     <preference name="prerendered-icon" value="true" />
     <preference name="detect-data-types" value="true" />
     <preference name="exit-on-suspend" value="false" />
+    <preference name="StatusBarOverlaysWebView" value="false" />
 
     <icon height="57" platform="ios" src="res/icon/ios/icon.png" width="57" />
     <icon height="114" platform="ios" src="res/icon/ios/icon@2x.png" width="114" />
