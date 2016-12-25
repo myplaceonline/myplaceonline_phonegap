@@ -139,7 +139,8 @@ app = {
       if (activePage.id == "phonegapmain") {
         $("#pgextra").html("<p>Cannot connect to the server.</p><p><a class='ui-btn' id='refresh_button'>Retry</a></p><a class='ui-btn' id='diagnostics_button'>Show Diagnostics</a></p>");
         $("#refresh_button").click(function() {
-          $.mobile.pageContainer.pagecontainer("change", ui.toPage);
+          app.navigate("/?phonegap=true");
+          return false;
         });
         $("#diagnostics_button").click(function() {
           myplaceonline.showDebugConsole();

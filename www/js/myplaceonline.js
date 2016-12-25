@@ -60,7 +60,7 @@ var myplaceonline = function(mymodule) {
   function consoleLog(msg) {
     if (debug) {
       if (window.console) {
-        window.console.log(msg);
+        window.console.log(new Date() + ": " + msg);
       }
       var t = new Date().toTimeString();
       var i = t.indexOf(' ');
@@ -76,7 +76,7 @@ var myplaceonline = function(mymodule) {
       if (window.console && window.console.dir) {
         window.console.dir(obj);
       }
-      consoleLog(getJSON(obj));
+      consoleLog("consoleDir JSON: " + getJSON(obj));
     }
   }
 
@@ -164,6 +164,7 @@ var myplaceonline = function(mymodule) {
         }
       });
     }
+    return dosend;
   }
 
   function getJSON(obj, max) {
@@ -184,12 +185,15 @@ var myplaceonline = function(mymodule) {
           return value;
         });
         cache = null;
-        if (result.length > max) {
+        if (!result) {
+          result = obj.toString();
+        }
+        if (result && result.length > max) {
           result = result.substring(0, max) + "...";
         }
         return result;
       } catch (e) {
-        return "null (error " + e + ", " + obj + ")";
+        return "null (error " + e + ", object: " + obj + ")";
       }
     } else {
       return "null";
@@ -262,20 +266,27 @@ var myplaceonline = function(mymodule) {
   function criticalError(msg, errorObj) {
     msg = "Browser Error. Please copy and report the following details to " + contact_email + ": " + msg;
     consoleLog(msg);
+    if (debug && errorObj && errorObj.stack) {
+      consoleLog(errorObj.stack);
+    }
     jserrors++;
     if (jserrors <= maxjserrors) {
-      sendDebug(msg, true, errorObj);
-      // Originally we alerted a certain number of JS errors, but it seems the
-      // common case is that the user does a JQM navigate which does some
-      // unexpected DOM manipulation. TODO: create some sort of UI element
-      // that shows that their browser session might be in a weird state,
-      // show the list of warnings, and recommend to consider refreshing.
-      
-      if (debug) {
-        alert(msg);
+      if (sendDebug(msg, true, errorObj)) {
+        // Originally we alerted a certain number of JS errors, but it seems the
+        // common case is that the user does a JQM navigate which does some
+        // unexpected DOM manipulation, so we suppress the alert and we don't
+        // take any preventative action like refreshing the page.
+        
+        // refreshPage();
+
+        if (debug) {
+          alert(msg);
+        }
+        
+        // TODO: create some sort of UI element
+        // that shows that their browser session might be in a weird state,
+        // show the list of warnings, and recommend to consider refreshing.
       }
-      
-      // refreshPage();
     }
   }
 
@@ -322,7 +333,7 @@ var myplaceonline = function(mymodule) {
         }
       }
     } catch (e) {
-      criticalError(e);
+      criticalError("Error processing msg", e);
     }
 
     var errorMsg = details + "\nurl: " + url + "\nline #: " + line;
@@ -338,7 +349,7 @@ var myplaceonline = function(mymodule) {
       try {
         holderrors += "\n\nFull JSON: " + getJSON(jsondetails, 1000000);
       } catch (e) {
-        criticalError(e);
+        criticalError("Error calling getJSON", e);
       }
     }
     
@@ -406,20 +417,23 @@ var myplaceonline = function(mymodule) {
     
     $(document).bind("pagecontainershow.mypshow", function( e, ui ) {
       
-      resetPendingPageLoads();
-      
       var activePage = getActivePage();
       
+      consoleLog("pagecontainershow.mypshow activePage: " + (activePage ? $(activePage).data("url") : "null"));
+      
+      resetPendingPageLoads();
+      
       /*
-      if (activePage) {
-        consoleLog("pagecontainershow: " + activePage.id + "," + $(activePage).attr('data-uniqueid'));
-        if (ui.prevPage && ui.prevPage.length > 0) {
-          // Don't keep the previous page cached
-          $(ui.prevPage[0]).remove();
+        var activePage = getActivePage();
+        if (activePage) {
+          consoleLog("pagecontainershow: " + activePage.id + "," + $(activePage).attr('data-uniqueid'));
+          if (ui.prevPage && ui.prevPage.length > 0) {
+            // Don't keep the previous page cached
+            $(ui.prevPage[0]).remove();
+          }
+        } else {
+          consoleLog("pagecontainershow no active page");
         }
-      } else {
-        consoleLog("pagecontainershow no active page");
-      }
       */
 
       // If there is a hash
@@ -743,8 +757,24 @@ var myplaceonline = function(mymodule) {
   // func may optionally take event and ui parameters:
   // http://api.jquerymobile.com/pagecontainer/#event-show
   function onPageLoad(func) {
-    $(document).one("pagecontainershow", $.mobile.pageContainer, func);
-    pendingPageLoads.push(func);
+    var wrappedFunc = function(event, ui) {
+      try {
+        myplaceonline.consoleLog("Running onPageLoad function");
+        if (debug) {
+          myplaceonline.consoleDir(func);
+        }
+        func(event, ui);
+      } catch (e) {
+        criticalError("Error processing onPageLoad", e);
+      }
+      myplaceonline.consoleLog("Finished onPageLoad function");
+    };
+    if (debug) {
+      myplaceonline.consoleLog("Binding onPageLoad func");
+    }
+    myplaceonline.consoleDir(func);
+    $(document).one("pagecontainershow", $.mobile.pageContainer, wrappedFunc);
+    pendingPageLoads.push(wrappedFunc);
   }
   
   function resetPendingPageLoads() {
@@ -752,12 +782,14 @@ var myplaceonline = function(mymodule) {
   }
 
   function runPendingPageLoads() {
+    myplaceonline.consoleLog("runPendingPageLoads count: " + pendingPageLoads.length);
     var i;
     for (i = 0; i < pendingPageLoads.length; i++) {
       var pendingPageLoad = pendingPageLoads[i];
       $(document).off("pagecontainershow", $.mobile.pageContainer, pendingPageLoad);
       pendingPageLoad();
     }
+    myplaceonline.consoleLog("runPendingPageLoads resetPendingPageLoads");
     resetPendingPageLoads();
   }
   
@@ -1165,6 +1197,7 @@ var myplaceonline = function(mymodule) {
   mymodule.nextUniqueId = nextUniqueId;
   mymodule.encodeEntities = encodeEntities;
   mymodule.prepareNewContent = prepareNewContent;
+  mymodule.getCurrentRelativePathAndQuery = getCurrentRelativePathAndQuery;
 
   mymodule.isFocusAllowed = function() {
     return allowFocusPlaceholder;
@@ -1176,6 +1209,10 @@ var myplaceonline = function(mymodule) {
   
   mymodule.setDebug = function(newvalue) {
     debug = newvalue;
+  };
+  
+  mymodule.isDebug = function() {
+    return debug;
   };
   
   mymodule.setInPhonegap = function(newvalue) {
