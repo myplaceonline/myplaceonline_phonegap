@@ -193,7 +193,7 @@ var myplaceonline = function(mymodule) {
         }
         return result;
       } catch (e) {
-        return "null (error " + e + ", object: " + obj + ")";
+        return "getJSON failed (error " + e + ", object: " + obj + ")";
       }
     } else {
       return "null";
@@ -507,7 +507,9 @@ var myplaceonline = function(mymodule) {
                     headers: {
                       "X-CSRF-Token": $("meta[name='csrf-token']").attr("content")
                     }
-                  }
+                  },
+                  false,
+                  false
                 );
               }, function() {
                 criticalError("Could not get file object");
@@ -583,19 +585,20 @@ var myplaceonline = function(mymodule) {
     });
 
     // http://api.jquerymobile.com/pagecontainer/#event-loadfailed
-    $(document).on("pagecontainerloadfailed", $.mobile.pageContainer, function(event, ui) {
+    $(document).on("pagecontainerloadfailed", $.mobile.pageContainer, function(event, data) {
       // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest#Properties
       jserrors++;
       if (jserrors <= maxjserrors) {
-        if (ui.xhr.status == 0 && !ui.xhr.responseText) {
+        if (data.xhr.status == 0 && !data.xhr.responseText) {
           alert("Could not communicate with server. This could be caused by:\n* Internet connection problem\n* Server is under maintenance\n\nPlease try again or report the error to " + contact_email);
         } else {
-          alert("Error " + ui.xhr.status + "\n" + ui.xhr.responseText + "\n\nPlease try again or report the error to " + contact_email);
+          alert("Error " + data.xhr.status + "\n" + data.xhr.responseText + "\n\nPlease try again or report the error to " + contact_email);
+          data.xhr.responseText = null;
         }
       }
       // https://github.com/jquery/jquery-mobile/issues/3143
-      // event.preventDefault();
-      // ui.deferred.reject( ui.absUrl, ui.options );
+      //event.preventDefault();
+      //data.deferred.reject( data.absUrl, data.options );
     });
   });
 
@@ -616,7 +619,11 @@ var myplaceonline = function(mymodule) {
       
       if (data.singular) {
         $(data.items[0].value).insertAfter(fileControl);
-        $("<input type='hidden' name='identity_file[id]' value='" + data.id + "' />").insertAfter(fileControl);
+        var singularNamePrefix = "identity_file";
+        if (data.singularNamePrefix) {
+          singularNamePrefix = data.singularNamePrefix;
+        }
+        $("<input type='hidden' name='" + singularNamePrefix + "[id]' value='" + data.id + "' />").insertAfter(fileControl);
         
         // Don't show a success notification because then the user might not click Save
         // myplaceonline.createSuccessNotification(data.successNotification);
@@ -759,20 +766,20 @@ var myplaceonline = function(mymodule) {
   function onPageLoad(func) {
     var wrappedFunc = function(event, ui) {
       try {
-        myplaceonline.consoleLog("Running onPageLoad function");
+        //myplaceonline.consoleLog("Running onPageLoad function");
         if (debug) {
-          myplaceonline.consoleDir(func);
+          //myplaceonline.consoleDir(func);
         }
         func(event, ui);
       } catch (e) {
         criticalError("Error processing onPageLoad", e);
       }
-      myplaceonline.consoleLog("Finished onPageLoad function");
+      //myplaceonline.consoleLog("Finished onPageLoad function");
     };
     if (debug) {
-      myplaceonline.consoleLog("Binding onPageLoad func");
+      //myplaceonline.consoleLog("Binding onPageLoad func");
     }
-    myplaceonline.consoleDir(func);
+    //myplaceonline.consoleDir(func);
     $(document).one("pagecontainershow", $.mobile.pageContainer, wrappedFunc);
     pendingPageLoads.push(wrappedFunc);
   }
@@ -894,7 +901,10 @@ var myplaceonline = function(mymodule) {
     if (!multiple) {
       for (var i in loadedScripts) {
         if (loadedScripts[i] == url) {
-          consoleLog("loadExternalScript: returning false");
+          consoleLog("loadExternalScript: script already loaded");
+          if (successFunc) {
+            successFunc();
+          }
           return false;
         }
       }
@@ -902,10 +912,10 @@ var myplaceonline = function(mymodule) {
     loadedScripts.push(url);
     return $.ajax({
       url: url,
-      dataType: 'script',
+      dataType: "script",
       success: successFunc,
       error: function() {
-        criticalError('Could not load ' + url);
+        criticalError("Could not load " + url);
       },
       async: async
     });
@@ -971,8 +981,8 @@ var myplaceonline = function(mymodule) {
     if (y > heightPadding) {
       y -= heightPadding;
     }
-    $('html, body').stop().animate({
-      scrollTop : y
+    $("html, body").stop().animate({
+      scrollTop: y
     }, 650, easingType);
   }
 
@@ -1158,6 +1168,11 @@ var myplaceonline = function(mymodule) {
   }
 
   function encodeEntities(str) {
+    if (!str) {
+      str = "";
+    } else {
+      str = str.toString();
+    }
     return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#27;");
   }
 
@@ -1179,6 +1194,7 @@ var myplaceonline = function(mymodule) {
   mymodule.saveCollapsibleStates = saveCollapsibleStates;
   mymodule.ensureStyledPage = ensureStyledPage;
   mymodule.scrollTop = scrollTop;
+  mymodule.scrollY = scrollY;
   mymodule.playSound = playSound;
   mymodule.maybeFocus = maybeFocus;
   mymodule.createSuccessNotification = createSuccessNotification;
