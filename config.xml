@@ -1,4 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
+<!--
+NOTE:
+For historical reasons, the builds for Android and iOS have to be done
+separately with the iOS build adding `.main` to the `id`.
+-->
 <widget id="com.myplaceonline" version="1.0.14" versionCode="1013" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
   <name>myplaceonline</name>
   <description>myplaceonline is a joy and meaning maximizer. https://myplaceonline.com/</description>
