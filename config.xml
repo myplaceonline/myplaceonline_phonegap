@@ -53,6 +53,14 @@ separately with the iOS build adding `.main` to the `id`.
   <gap:config-file platform="android" parent="/manifest">
     <application android:theme="@android:style/Theme.NoTitleBar"></application>
   </gap:config-file>
+
+  <gap:config-file platform="ios" parent="NSPhotoLibraryUsageDescription" mode="replace">
+    <string>App would like to access the camera.</string>
+  </gap:config-file>
+  
+  <gap:config-file platform="ios" parent="NSCameraUsageDescription" mode="replace">
+    <string>App would like to access the camera.</string>
+  </gap:config-file>
   
   <platform name="android">
     <preference name="android-installLocation" value="auto" />
