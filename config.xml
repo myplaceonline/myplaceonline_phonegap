@@ -81,13 +81,13 @@ separately with the iOS build adding `.main` to the `id`.
   </platform>
   
   <platform name="ios">
-    <gap:edit-config target="NSPhotoLibraryUsageDescription" file="*-Info.plist" mode="merge" overwrite="true">
+    <edit-config target="NSPhotoLibraryUsageDescription" file="*-Info.plist" mode="merge" overwrite="true">
       <string>App would like to access the camera.</string>
-    </gap:edit-config>
+    </edit-config>
     
-    <gap:edit-config target="NSCameraUsageDescription" file="*-Info.plist" mode="merge" overwrite="true">
+    <edit-config target="NSCameraUsageDescription" file="*-Info.plist" mode="merge" overwrite="true">
       <string>App would like to access the camera.</string>
-    </gap:edit-config>
+    </edit-config>
     
     <preference name="target-device" value="universal" />
     <preference name="prerendered-icon" value="true" />
