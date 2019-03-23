@@ -19,6 +19,11 @@ app = {
     // We always set debug to true to capture the initial set of console logs in case there's a problem,
     // but in most cases when the homepage comes in, it will disable debug
     myplaceonline.setDebug(true);
+    if (app.isiOS()) {
+      $.mobile.hashListeningEnabled = false;
+      $.mobile.pushStateEnabled = false;
+      $.mobile.changePage.defaults.changeHash = false;
+    }
     myplaceonline.consoleLog("phonegap mobileinit");
     app.savePhonegapPath();
     window.CKEDITOR_BASEPATH = app.base_url + "/assets/ckeditor/";
@@ -29,7 +34,7 @@ app = {
     myplaceonline.setInPhonegap(true);
     $(document).on("pagecontainerchangefailed.phonegap", app.loadFailed);
     myplaceonline.pageloaded("phonegapmain", app.initialpageloaded);
- },
+  },
 
   savePhonegapPath: function() {
     app.phonegapHomepage = "" + window.location;
