@@ -53,14 +53,6 @@ separately with the iOS build adding `.main` to the `id`.
     <application android:theme="@android:style/Theme.NoTitleBar"></application>
   </gap:config-file>
 
-  <edit-config target="NSPhotoLibraryUsageDescription" file="*-Info.plist" mode="merge">
-    <string>App would like to access the camera.</string>
-  </edit-config>
-  
-  <edit-config target="NSCameraUsageDescription" file="*-Info.plist" mode="merge">
-    <string>App would like to access the camera.</string>
-  </edit-config>
-  
   <platform name="android">
     <preference name="android-installLocation" value="auto" />
     <preference name="android-minSdkVersion" value="16" />
@@ -89,6 +81,14 @@ separately with the iOS build adding `.main` to the `id`.
   </platform>
   
   <platform name="ios">
+    <gap:edit-config target="NSPhotoLibraryUsageDescription" file="*-Info.plist" mode="merge">
+      <string>App would like to access the camera.</string>
+    </gap:edit-config>
+    
+    <gap:edit-config target="NSCameraUsageDescription" file="*-Info.plist" mode="merge">
+      <string>App would like to access the camera.</string>
+    </gap:edit-config>
+    
     <preference name="target-device" value="universal" />
     <preference name="prerendered-icon" value="true" />
     <preference name="detect-data-types" value="true" />
