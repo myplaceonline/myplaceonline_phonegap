@@ -4,7 +4,7 @@ NOTE:
 For historical reasons, the builds for Android and iOS have to be done
 separately with the iOS build adding `.main` to the `id`.
 -->
-<widget id="com.myplaceonline.main" version="1.0.15" versionCode="1015" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+<widget id="com.myplaceonline.main" version="1.0.16" versionCode="1016" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
   <name>myplaceonline</name>
   <description>myplaceonline is a joy and meaning maximizer. https://myplaceonline.com/</description>
   <author email="contact@myplaceonline.com" href="https://myplaceonline.com/">contact@myplaceonline.com</author>
