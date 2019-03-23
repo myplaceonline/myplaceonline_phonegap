@@ -95,7 +95,7 @@ separately with the iOS build adding `.main` to the `id`.
     <preference name="detect-data-types" value="true" />
     <preference name="exit-on-suspend" value="false" />
     <preference name="StatusBarOverlaysWebView" value="false" />
-    <preference name="StatusBarBackgroundColor" value="#000000" />
+    <!--<preference name="StatusBarBackgroundColor" value="#000000" />-->
     <preference name="StatusBarStyle" value="lightcontent" />
     <preference name="FadeSplashScreenDuration" value="0"/>
 
