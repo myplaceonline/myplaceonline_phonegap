@@ -1,10 +1,10 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <!--
 NOTE:
 For historical reasons, the builds for Android and iOS have to be done
 separately with the iOS build adding `.main` to the `id`.
 -->
-<widget id="com.myplaceonline.main" version="1.0.19" versionCode="1019" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+<widget id="com.myplaceonline" version="1.0.19" versionCode="1019" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
   <name>myplaceonline</name>
   <description>myplaceonline is a joy and meaning maximizer. https://myplaceonline.com/</description>
   <author email="contact@myplaceonline.com" href="https://myplaceonline.com/">contact@myplaceonline.com</author>
@@ -45,17 +45,14 @@ separately with the iOS build adding `.main` to the `id`.
   <allow-intent href="geo:*" />
   <access origin="*" />
   
-  <!--
-  https://github.com/phonegap/build/issues/97
-  Requires xmlns:gap and xmlns:android
-  -->
-  <gap:config-file platform="android" parent="/manifest">
-    <application android:theme="@android:style/Theme.NoTitleBar"></application>
-  </gap:config-file>
-
   <platform name="android">
+    <edit-config file="AndroidManifest.xml" mode="merge" target="/manifest/application/activity">
+      <activity android:theme="@android:style/Theme.NoTitleBar" />
+    </edit-config>
+    
     <preference name="android-installLocation" value="auto" />
     <preference name="android-minSdkVersion" value="16" />
+    <preference name="android-targetSdkVersion" value="26" />
     
     <icon qualifier="ldpi" src="res/icon/android/drawable-ldpi-icon.png" />
     <icon qualifier="mdpi" src="res/icon/android/drawable-mdpi-icon.png" />
