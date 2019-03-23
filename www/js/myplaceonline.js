@@ -28,7 +28,7 @@ var myplaceonline = function(mymodule) {
   var maxjsonobj = 200;
   var heightPadding = 41;
   var debug = false;
-  var loadedScripts = [];
+  var loadedResources = [];
   var onetimeFunctions = [];
   var jserrors = 0;
   var holderrors = "";
@@ -133,8 +133,8 @@ var myplaceonline = function(mymodule) {
       // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/Stack
       stackTrace = new Error().stack;
       
-      if (errorObj) {
-        stackTrace += "\n\nOriginal stack:\n" + errorObj.stack;
+      if (errorObj && errorObj.stack) {
+        stackTrace = errorObj.stack + "\n\nsendDebug stack:\n" + stackTrace;
       }
     }
     if (myplaceonline.checkSendDebug) {
@@ -264,7 +264,12 @@ var myplaceonline = function(mymodule) {
   }
 
   function criticalError(msg, errorObj) {
-    msg = "Browser Error. Please copy and report the following details to " + contact_email + ": " + msg;
+    msg = "Application Error. The details have been reported to us and we'll investigate. Details: " + msg;
+    
+    if (errorObj && errorObj.message) {
+      msg += " (" + errorObj.message + ")";
+    }
+    
     consoleLog(msg);
     if (debug && errorObj && errorObj.stack) {
       consoleLog(errorObj.stack);
@@ -272,16 +277,7 @@ var myplaceonline = function(mymodule) {
     jserrors++;
     if (jserrors <= maxjserrors) {
       if (sendDebug(msg, true, errorObj)) {
-        // Originally we alerted a certain number of JS errors, but it seems the
-        // common case is that the user does a JQM navigate which does some
-        // unexpected DOM manipulation, so we suppress the alert and we don't
-        // take any preventative action like refreshing the page.
-        
-        // refreshPage();
-
-        if (debug) {
-          alert(msg);
-        }
+        alert(msg);
         
         // TODO: create some sort of UI element
         // that shows that their browser session might be in a weird state,
@@ -484,7 +480,7 @@ var myplaceonline = function(mymodule) {
                 }
                 ft.upload(
                   fileURI,
-                  encodeURI(app.base_url + "/api/newfile"),
+                  encodeURI(app.base_url + "/api/newfile2"),
                   function(result) {
                     $uploading.remove();
                     var resultObj = jQuery.parseJSON(result.response);
@@ -675,9 +671,7 @@ var myplaceonline = function(mymodule) {
     formData.append($inputFileElement.attr("name"), file);
 
     // https://developer.mozilla.org/en-US/docs/Web/API/Location
-    formData.append("urlpath", window.location.pathname);
-    formData.append("urlsearch", window.location.search);
-    formData.append("urlhash", window.location.hash);
+    formData.append("urlpath", window.location.pathname == "/" ? $inputFileElement[0].form.action : window.location.pathname);
             
     if ($inputFileElement.data("position_field")) {
       formData.append("position_field", $inputFileElement.data("position_field"));
@@ -697,7 +691,7 @@ var myplaceonline = function(mymodule) {
 
     var jqxhr = $.ajax({
       type: "POST",
-      url: "/api/newfile",
+      url: "/api/newfile2",
       data: formData,
       timeout: 0,
       context: filecontext,
@@ -899,8 +893,8 @@ var myplaceonline = function(mymodule) {
   function loadExternalScript(url, async, successFunc, multiple) {
     consoleLog("loadExternalScript: url " + url + ", async " + async + ", multiple " + multiple);
     if (!multiple) {
-      for (var i in loadedScripts) {
-        if (loadedScripts[i] == url) {
+      for (var i in loadedResources) {
+        if (loadedResources[i] == url) {
           consoleLog("loadExternalScript: script already loaded");
           if (successFunc) {
             successFunc();
@@ -909,7 +903,7 @@ var myplaceonline = function(mymodule) {
         }
       }
     }
-    loadedScripts.push(url);
+    loadedResources.push(url);
     return $.ajax({
       url: url,
       dataType: "script",
@@ -924,13 +918,14 @@ var myplaceonline = function(mymodule) {
   function loadExternalCss(url, multiple) {
     consoleLog("loadExternalCss: url " + url + ", multiple " + multiple);
     if (!multiple) {
-      for (var i in loadedScripts) {
-        if (loadedScripts[i] == url) {
+      for (var i in loadedResources) {
+        if (loadedResources[i] == url) {
           return false;
         }
       }
     }
     $('head').append('<link rel="stylesheet" href="' + url + '" type="text/css" />');
+    loadedResources.push(url);
     return true;
   }
 
@@ -1030,10 +1025,13 @@ var myplaceonline = function(mymodule) {
     }
   }
 
-  function createSuccessNotification(message, timeout) {
+  function createSuccessNotification(message, timeout, encodeHTML) {
     if (noty) {
       if (!timeout) {
         timeout = 4000;
+      }
+      if (encodeHTML) {
+        message = encodeEntities(message);
       }
       noty({text: message, layout: 'topCenter', type: 'success', timeout: timeout});
     } else {
@@ -1041,10 +1039,13 @@ var myplaceonline = function(mymodule) {
     }
   }
 
-  function createErrorNotification(message, duration, timeout) {
+  function createErrorNotification(message, timeout, encodeHTML) {
     if (noty) {
       if (!timeout) {
         timeout = 4000;
+      }
+      if (encodeHTML) {
+        message = encodeEntities(message);
       }
       noty({text: message, layout: 'topCenter', type: 'error', timeout: timeout});
     } else {
@@ -1112,7 +1113,7 @@ var myplaceonline = function(mymodule) {
     if (window.cordova && cordova.plugins && cordova.plugins.clipboard) {
       $("[data-clipboard-text]").click( function(e) {
         cordova.plugins.clipboard.copy($(this).data("clipboard-text"));
-        createSuccessNotification("Copied '" + $(this).data("clipboard-text") + "' to clipboard.");
+        createSuccessNotification("Copied '" + $(this).data("clipboard-text") + "' to clipboard.", null, true);
         return $(this).data("clipboard-clickthrough") == "yes" ? true : false;
       });
     } else {
@@ -1123,13 +1124,13 @@ var myplaceonline = function(mymodule) {
         var clipboard = new ZeroClipboard(objects);
         clipboard.on("ready", function(readyEvent) {
           clipboard.on("aftercopy", function(event) {
-            createSuccessNotification("Copied '" + event.data["text/plain"] + "' to clipboard.");
+            createSuccessNotification("Copied '" + event.data["text/plain"] + "' to clipboard.", null, true);
           });
         });
       } else if (clipboard_integration == 2) {
         $("[data-clipboard-text]").click( function(e) {
           window.ffclipboard.setText($(this).data("clipboard-text"));
-          createSuccessNotification("Copied '" + $(this).data("clipboard-text") + "' to clipboard.");
+          createSuccessNotification("Copied '" + $(this).data("clipboard-text") + "' to clipboard.", null, true);
           return $(this).data("clipboard-clickthrough") == "yes" ? true : false;
         });
       }
@@ -1236,7 +1237,7 @@ var myplaceonline = function(mymodule) {
   };
   
   mymodule.isInPhoneGap = function() {
-    return inPhoneGap
+    return inPhoneGap;
   };
   
   mymodule.setIsInitialPhonegapPage = function(newvalue) {
@@ -1256,7 +1257,7 @@ var myplaceonline = function(mymodule) {
   };
   
   mymodule.setBaseUrl = function(newvalue) {
-    if (newvalue.startsWith("http://localhost")) {
+    if (startsWith(newvalue, "http://localhost")) {
       baseurl = newvalue;
     }
   }

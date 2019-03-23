@@ -11,6 +11,8 @@ app = {
   
   offline: false,
 
+  isiOS: true,
+
   // The basic flow is: JQM mobileinit calls this function. This function registers
   // a JQM pageloaded handler for the main built-in page. Once the built-in page loads,
   // we bind phonegap events. Once that finishes, we load the real homepage.
@@ -19,9 +21,23 @@ app = {
     // We always set debug to true to capture the initial set of console logs in case there's a problem,
     // but in most cases when the homepage comes in, it will disable debug
     myplaceonline.setDebug(true);
-    $.mobile.hashListeningEnabled = false;
-    $.mobile.pushStateEnabled = false;
-    $.mobile.changePage.defaults.changeHash = false;
+
+    // Starting with iOS 11.3, the following security errors occur:
+    // "SecurityError: Blocked attempt to use history.replaceState() to change session history URL
+    // from [...]/myplaceonline.app/www/index.html#/?phonegap=true to 
+    // https://myplaceonline.com/?phonegap=true. Protocols, domains, ports, usernames, and passwords
+    // must match."
+    // The fix is to disable history on iOS:
+    // https://stackoverflow.com/q/52236521/4135310
+    // However, this early in loading, `device` isn't available, so
+    // we can't call app.isiOS(), so we just have to comment/uncomment
+    // for iOS vs. Android builds:
+    if (app.isiOS) {
+      $.mobile.hashListeningEnabled = false;
+      $.mobile.pushStateEnabled = false;
+      $.mobile.changePage.defaults.changeHash = false;
+    }
+
     myplaceonline.consoleLog("phonegap mobileinit");
     app.savePhonegapPath();
     window.CKEDITOR_BASEPATH = app.base_url + "/assets/ckeditor/";
