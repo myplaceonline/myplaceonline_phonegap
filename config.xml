@@ -17,6 +17,7 @@ separately with the iOS build adding `.main` to the `id`.
   <plugin name="cordova-plugin-camera" source="npm" />
   <plugin name="cordova-plugin-file" source="npm" />
   <plugin name="cordova-plugin-file-transfer" source="npm" />
+  <plugin name="@cartegraph/cordova-cookie-master" source="npm" />
   
   <content src="index.html" />
   <icon src="icon.png" />
