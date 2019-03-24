@@ -106,6 +106,7 @@ app = {
     var documentBaseUrl = $.mobile.path.parseUrl(app.base_url + "/");
     myplaceonline.consoleLog("phonegap new base href: " + $("base").attr("href") + "; setting documentBase: " + documentBaseUrl.href);
     $.mobile.path.documentBase = documentBaseUrl;
+    alert((cookieMaster ? "true" : "false"));
     app.navigate("/?phonegap=true");
   },
 
