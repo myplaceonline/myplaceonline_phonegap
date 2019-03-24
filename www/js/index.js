@@ -11,7 +11,7 @@ app = {
   
   offline: false,
 
-  isiOS: false, // See below
+  static_ios: false, // See below
 
   // The basic flow is: JQM mobileinit calls this function. This function registers
   // a JQM pageloaded handler for the main built-in page. Once the built-in page loads,
@@ -32,7 +32,7 @@ app = {
     // However, this early in loading, `device` isn't available, so
     // we can't call app.isiOS(), so we just have to comment/uncomment
     // for iOS vs. Android builds:
-    if (app.isiOS) {
+    if (app.static_ios) {
       $.mobile.hashListeningEnabled = false;
       $.mobile.pushStateEnabled = false;
       $.mobile.changePage.defaults.changeHash = false;
