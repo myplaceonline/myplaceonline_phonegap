@@ -134,7 +134,8 @@ app = {
         window.history.back();
       }
        
-      myplaceonline.consoleLog("phonegap history length: " + window.history.length + ", state: " + window.history.state);
+      myplaceonline.consoleLog("phonegap history length: " + window.history.length + ", state:");
+      myplaceonline.consoleDir(window.history.state);
       
     } else {
       app.close();
