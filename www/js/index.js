@@ -126,6 +126,7 @@ app = {
       if (window.navigator && window.navigator.app && window.navigator.app.backHistory) {
         myplaceonline.consoleLog("phonegap window.navigator.app.backHistory");
         window.navigator.app.backHistory();
+        window.history.back();
       } else {
         myplaceonline.consoleLog("phonegap window.history.back");
         window.history.back();
