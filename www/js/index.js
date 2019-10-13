@@ -11,7 +11,7 @@ app = {
   
   offline: false,
 
-  usePushState: false, // See below
+  suppressPushState: true, // See below
 
   // The basic flow is: JQM mobileinit calls this function. This function registers
   // a JQM pageloaded handler for the main built-in page. Once the built-in page loads,
@@ -32,8 +32,8 @@ app = {
     // However, this early in loading, `device` isn't available, so
     // we can't call app.isiOS(), so we just have to comment/uncomment
     // for iOS vs. Android builds:
-    myplaceonline.consoleLog("phonegap usePushState: " + app.usePushState);
-    if (app.usePushState) {
+    myplaceonline.consoleLog("phonegap suppressPushState: " + app.suppressPushState);
+    if (app.suppressPushState) {
       $.mobile.hashListeningEnabled = false;
       $.mobile.pushStateEnabled = false;
       $.mobile.changePage.defaults.changeHash = false;
