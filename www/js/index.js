@@ -33,6 +33,8 @@ app = {
     // we can't call app.isiOS(), so we just have to comment/uncomment
     // for iOS vs. Android builds:
     if (app.static_ios) {
+      myplaceonline.consoleLog("phonegap disabling pushState");
+      
       $.mobile.hashListeningEnabled = false;
       $.mobile.pushStateEnabled = false;
       $.mobile.changePage.defaults.changeHash = false;
