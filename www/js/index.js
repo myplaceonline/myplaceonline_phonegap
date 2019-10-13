@@ -32,9 +32,8 @@ app = {
     // However, this early in loading, `device` isn't available, so
     // we can't call app.isiOS(), so we just have to comment/uncomment
     // for iOS vs. Android builds:
+    myplaceonline.consoleLog("phonegap static_ios: " + app.static_ios);
     if (app.static_ios) {
-      myplaceonline.consoleLog("phonegap disabling pushState");
-      
       $.mobile.hashListeningEnabled = false;
       $.mobile.pushStateEnabled = false;
       $.mobile.changePage.defaults.changeHash = false;
@@ -129,10 +128,14 @@ app = {
         myplaceonline.consoleLog("phonegap window.navigator.app.backHistory");
         window.navigator.app.backHistory();
         window.history.back();
+        myplaceonline.consoleLog("phonegap tried to go back");
       } else {
         myplaceonline.consoleLog("phonegap window.history.back");
         window.history.back();
       }
+       
+      myplaceonline.consoleLog("phonegap history length: " + window.history.length + ", state: " + window.history.state);
+      
     } else {
       app.close();
     }
