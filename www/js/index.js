@@ -11,7 +11,7 @@ app = {
   
   offline: false,
 
-  static_ios: false, // See below
+  usePushState: false, // See below
 
   // The basic flow is: JQM mobileinit calls this function. This function registers
   // a JQM pageloaded handler for the main built-in page. Once the built-in page loads,
@@ -32,8 +32,8 @@ app = {
     // However, this early in loading, `device` isn't available, so
     // we can't call app.isiOS(), so we just have to comment/uncomment
     // for iOS vs. Android builds:
-    myplaceonline.consoleLog("phonegap static_ios: " + app.static_ios);
-    if (app.static_ios) {
+    myplaceonline.consoleLog("phonegap usePushState: " + app.usePushState);
+    if (app.usePushState) {
       $.mobile.hashListeningEnabled = false;
       $.mobile.pushStateEnabled = false;
       $.mobile.changePage.defaults.changeHash = false;
@@ -126,8 +126,7 @@ app = {
     if (!myplaceonline.isInitialPhonegapPage() || window.location.hash.indexOf("ui-state=dialog") != -1) {
       if (window.navigator && window.navigator.app && window.navigator.app.backHistory) {
         myplaceonline.consoleLog("phonegap window.navigator.app.backHistory");
-        history.go(0);
-        myplaceonline.consoleLog("phonegap tried to go back");
+        window.navigator.app.backHistory();
       } else {
         myplaceonline.consoleLog("phonegap window.history.back");
         window.history.back();
