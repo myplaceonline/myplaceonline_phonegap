@@ -53,7 +53,7 @@ separately with the iOS build adding `.main` to the `id`.
     
     <preference name="android-installLocation" value="auto" />
     <preference name="android-minSdkVersion" value="16" />
-    <preference name="android-targetSdkVersion" value="26" />
+    <preference name="android-targetSdkVersion" value="28" />
     
     <icon qualifier="ldpi" src="res/icon/android/drawable-ldpi-icon.png" />
     <icon qualifier="mdpi" src="res/icon/android/drawable-mdpi-icon.png" />
