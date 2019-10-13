@@ -11,7 +11,7 @@ app = {
   
   offline: false,
 
-  suppressPushState: true, // See below
+  suppressPushState: false, // See usage below
 
   // The basic flow is: JQM mobileinit calls this function. This function registers
   // a JQM pageloaded handler for the main built-in page. Once the built-in page loads,
