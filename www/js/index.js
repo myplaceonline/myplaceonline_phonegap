@@ -123,7 +123,13 @@ app = {
     myplaceonline.consoleLog("phonegap onBackButton");
 
     if (!myplaceonline.isInitialPhonegapPage() || window.location.hash.indexOf("ui-state=dialog") != -1) {
-      window.history.go(-1);
+      if (window.navigator && window.navigator.app && window.navigator.app.backHistory) {
+        myplaceonline.consoleLog("phonegap window.navigator.app.backHistory");
+        window.navigator.app.backHistory();
+      } else {
+        myplaceonline.consoleLog("phonegap window.history.back");
+        window.history.back();
+      }
     } else {
       app.close();
     }
