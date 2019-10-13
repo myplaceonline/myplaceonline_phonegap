@@ -126,8 +126,7 @@ app = {
     if (!myplaceonline.isInitialPhonegapPage() || window.location.hash.indexOf("ui-state=dialog") != -1) {
       if (window.navigator && window.navigator.app && window.navigator.app.backHistory) {
         myplaceonline.consoleLog("phonegap window.navigator.app.backHistory");
-        window.navigator.app.backHistory();
-        window.history.back();
+        history.go(0);
         myplaceonline.consoleLog("phonegap tried to go back");
       } else {
         myplaceonline.consoleLog("phonegap window.history.back");
