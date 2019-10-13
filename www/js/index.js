@@ -124,8 +124,15 @@ app = {
     myplaceonline.consoleLog("phonegap onBackButton");
 
     if (!myplaceonline.isInitialPhonegapPage() || window.location.hash.indexOf("ui-state=dialog") != -1) {
-      myplaceonline.consoleLog("phonegap window.history.back");
-      window.history.go(-2);
+      if (window.navigator && window.navigator.app && window.navigator.app.backHistory) {
+        myplaceonline.consoleLog("phonegap window.navigator.app.backHistory");
+        window.navigator.app.backHistory();
+        window.history.back();
+        myplaceonline.consoleLog("phonegap tried to go back");
+      } else {
+        myplaceonline.consoleLog("phonegap window.history.back");
+        window.history.back();
+      }
        
       myplaceonline.consoleLog("phonegap history length: " + window.history.length + ", state:");
       myplaceonline.consoleDir(window.history.state);
