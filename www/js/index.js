@@ -124,6 +124,7 @@ app = {
     myplaceonline.consoleLog("phonegap onBackButton");
 
     if (!myplaceonline.isInitialPhonegapPage() || window.location.hash.indexOf("ui-state=dialog") != -1) {
+      /*
       if (window.navigator && window.navigator.app && window.navigator.app.backHistory) {
         myplaceonline.consoleLog("phonegap window.navigator.app.backHistory");
         window.navigator.app.backHistory();
@@ -134,6 +135,12 @@ app = {
        
       myplaceonline.consoleLog("phonegap history length: " + window.history.length + ", state:");
       myplaceonline.consoleDir(window.history.state);
+      */
+      
+      // See:
+      // https://community.adobe.com/t5/PhoneGap/window-history-back-window-navigator-app-backHistory-no-longer/td-p/10666331
+      // https://stackoverflow.com/questions/52236521/jquerymobilephonegapios-11-blocked-attempt-to-use-history-replacestate-to-c
+      myplaceonline.createErrorNotification(app.getOSName() + " no longer allows the framework that we use to implement the back button.");
       
     } else {
       app.close();
@@ -206,6 +213,10 @@ app = {
 
   isiOS: function() {
     return device.platform == 'iOS';
+  },
+  
+  getOSName: function() {
+    return app.isiOS() ? "iOS" : "Android";
   },
 
   checkFirstLoad: function() {
