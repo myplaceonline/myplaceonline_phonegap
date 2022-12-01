@@ -1,0 +1,27 @@
+{
+  "dependencies": {
+    "unorm": "^1.6.0"
+  },
+  "devDependencies": {
+    "@cartegraph/cordova-cookie-master": "^1.1.0",
+    "cordova-ios": "^6.2.0"
+  },
+  "cordova": {
+    "plugins": {
+      "cordova-plugin-device": {},
+      "cordova-plugin-inappbrowser": {},
+      "cordova-plugin-splashscreen": {},
+      "cordova-universal-clipboard": {},
+      "cordova-plugin-geolocation": {},
+      "cordova-plugin-camera": {},
+      "cordova-plugin-file": {},
+      "cordova-plugin-file-transfer": {},
+      "@cartegraph/cordova-cookie-master": {},
+      "cordova-plugin-whitelist": {},
+      "cordova-cookie-master": {}
+    },
+    "platforms": [
+      "ios"
+    ]
+  }
+}
