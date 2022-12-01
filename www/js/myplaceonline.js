@@ -38,7 +38,7 @@ var myplaceonline = function(mymodule) {
   var collapseStates = {};
   var muted = true;
   var redirectAnchor = null;
-  var clipboard_integration = 1;
+  var clipboard_integration = 3; // Sets the default clipboard integration
   var initialPhonegapPage = false;
   var pendingPageLoads = [];
   var lastuniqueid = 1;
@@ -277,7 +277,7 @@ var myplaceonline = function(mymodule) {
     jserrors++;
     if (jserrors <= maxjserrors) {
       if (sendDebug(msg, true, errorObj)) {
-        alert(msg);
+        //alert(msg);
         
         // TODO: create some sort of UI element
         // that shows that their browser session might be in a weird state,
@@ -337,6 +337,11 @@ var myplaceonline = function(mymodule) {
       errorMsg += " (" + colno + ")";
     }
     errorMsg += "\ntype: " + t;
+
+    if (errorMsg.indexOf("jquery-ujs has already been loaded") != -1) {
+      consoleLog("Suppressing error: " + errorMsg);
+      return suppressErrorAlert;
+    }
 
     criticalError(errorMsg, errorObj);
 
@@ -1119,7 +1124,10 @@ var myplaceonline = function(mymodule) {
   function ensureClipboard(objects) {
     // If we're in PhoneGap, use the clipboard plugin; otherwise,
     // check if the user has overriden clipboard integration and use that
-    // option or fall back to ZeroClipboard
+    // option or fall back
+    
+    // See Myp::CLIPBOARD_INTEGRATIONS
+    
     if (window.cordova && cordova.plugins && cordova.plugins.clipboard) {
       $("[data-clipboard-text]").click( function(e) {
         cordova.plugins.clipboard.copy($(this).data("clipboard-text"));
@@ -1128,21 +1136,32 @@ var myplaceonline = function(mymodule) {
       });
     } else {
       if (clipboard_integration === 2 && !window.ffclipboard) {
+        clipboard_integration = 3;
+      }
+      if (clipboard_integration === 3 && typeof ClipboardJS !== 'function') {
         clipboard_integration = 1;
       }
-      if (clipboard_integration == 1) {
-        var clipboard = new ZeroClipboard(objects);
-        clipboard.on("ready", function(readyEvent) {
-          clipboard.on("aftercopy", function(event) {
-            createSuccessNotification("Copied '" + event.data["text/plain"] + "' to clipboard.", null, true);
-          });
+
+      if (clipboard_integration >= 1 && clipboard_integration <= 3) {
+        var clipboard = new ClipboardJS(".clipboardable");
+        clipboard.on("success", function(e) {
+          console.info("Clipboard Success Action:", e.action);
+          console.info("Clipboard Success Text:", e.text);
+          console.info("Clipboard Success Trigger:", e.trigger);
+
+          //e.clearSelection();
+          
+          myplaceonline.createSuccessNotification("Copied " + e.text + " to clipboard.", null, true);
         });
-      } else if (clipboard_integration == 2) {
-        $("[data-clipboard-text]").click( function(e) {
-          window.ffclipboard.setText($(this).data("clipboard-text"));
-          createSuccessNotification("Copied '" + $(this).data("clipboard-text") + "' to clipboard.", null, true);
-          return $(this).data("clipboard-clickthrough") == "yes" ? true : false;
+        
+        clipboard.on("error", function(e) {
+          console.error("Clipboard Success Action:", e.action);
+          console.error("Clipboard Success Trigger:", e.trigger);
+          
+          myplaceonline.createErrorNotification("Copy to clipboard not supported on your browser");
         });
+      } else {
+        myplaceonline.createErrorNotification("Unsupported clipboard option " + clipboard_integration);
       }
     }
   }
