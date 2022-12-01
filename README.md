@@ -26,7 +26,11 @@ For details, see parent project at https://github.com/myplaceonline/myplaceonlin
     1. Wait for "Indexing" to complete
     1. First time: Preferences } Accounts } Add } root@myplaceonline.com
     1. Double click on FindHumane
-        1. Signing & Capabilities } Team: ...
+        1. Signing & Capabilities } Debug } Team: ...
+        1. Signing & Capabilities } Release } Team: ...
+        1. Signing & Capabilities } Debug } Uncheck "Automatically manage signing"
+        1. Signing & Capabilities } Debug } Check "Automatically manage signing"
+        1. Build Settings } Code Signing Identity } Release } Apple Development
     1. Next to the play/stop buttons, to the right of myplaceonline, select Build } Any iOS Device
     1. Product } Archive
     1. Click Distribute App
