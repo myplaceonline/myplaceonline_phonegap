@@ -7,10 +7,21 @@ For details, see parent project at https://github.com/myplaceonline/myplaceonlin
 
 ## Local build
 
+* sudo npm install -g cordova
+
+### Android
+
+* Make sure .main is not in config.xml
 * export ANDROID_HOME=~/Android/Sdk/
 * export PATH=${ANDROID_HOME}/tools/:$PATH
 * phonegap build android
 * phonegap build android --release -- --keystore="../../lib/keys/myplaceonline_android_phonegap.keystore" --alias=myplaceonline_alias
+
+### iOS
+
+* Add .main to config.xml
+* phonegap build ios
+* phonegap build ios --release -- --keystore="../../lib/keys/myplaceonline_android_phonegap.keystore" --alias=myplaceonline_alias
 
 ## Remote Debugging
 
