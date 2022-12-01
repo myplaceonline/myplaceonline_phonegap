@@ -103,7 +103,9 @@ app = {
 
   loadHomepage: function() {
     myplaceonline.consoleLog("phonegap loadHomepage " + app.base_url + "/" + "; current base href: " + $("base").attr("href"));
-    $("base").attr("href", app.base_url + "/");
+    var base = document.createElement('base');
+    base.href = app.base_url + "/";
+    document.getElementsByTagName('head')[0].appendChild(base);
     var documentBaseUrl = $.mobile.path.parseUrl(app.base_url + "/");
     myplaceonline.consoleLog("phonegap new base href: " + $("base").attr("href") + "; setting documentBase: " + documentBaseUrl.href);
     $.mobile.path.documentBase = documentBaseUrl;
