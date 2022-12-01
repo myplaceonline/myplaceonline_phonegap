@@ -88,6 +88,10 @@ separately with the iOS build adding `.main` to the `id`.
       <string>For the ability to add GPS coordinates when creating a location.</string>
     </edit-config>
     
+    <edit-config target="NSLocationAlwaysAndWhenInUseUsageDescription" file="*-Info.plist" mode="merge" overwrite="true">
+      <string>For the ability to add GPS coordinates when creating a location.</string>
+    </edit-config>
+    
     <preference name="target-device" value="universal" />
     <preference name="prerendered-icon" value="true" />
     <preference name="detect-data-types" value="true" />
