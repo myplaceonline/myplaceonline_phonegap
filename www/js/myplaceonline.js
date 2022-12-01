@@ -906,6 +906,9 @@ var myplaceonline = function(mymodule) {
   * @param multiple
   */
   function loadExternalScript(url, async, successFunc, multiple) {
+    if (url.chartAt(0) == '/') {
+      url = "https://myplaceonline.com" + url;
+    }
     consoleLog("loadExternalScript: url " + url + ", async " + async + ", multiple " + multiple);
     if (!multiple) {
       for (var i in loadedResources) {
@@ -931,6 +934,9 @@ var myplaceonline = function(mymodule) {
   }
 
   function loadExternalCss(url, multiple) {
+    if (url.chartAt(0) == '/') {
+      url = "https://myplaceonline.com" + url;
+    }
     consoleLog("loadExternalCss: url " + url + ", multiple " + multiple);
     if (!multiple) {
       for (var i in loadedResources) {
