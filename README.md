@@ -22,6 +22,7 @@ For details, see parent project at https://github.com/myplaceonline/myplaceonlin
 1. Add .main to config.xml
 1. `cordova platform rm ios`
 1. `cordova platform add ios`
+1. `cordova build ios`
 1. `open -a Xcode platforms/ios`
     1. Wait for "Indexing" to complete
     1. First time: Preferences } Accounts } Add } root@myplaceonline.com
@@ -35,6 +36,21 @@ For details, see parent project at https://github.com/myplaceonline/myplaceonlin
     1. Product } Archive
     1. Click Distribute App
     1. Wait for an email that "The following build has completed processing"
+    1. Go to https://appstoreconnect.apple.com/apps/
+        1. Click on Myplaceonline
+        1. Click on the plus button in the top left to create a new version and put in X.Y.Z
+        1. Summarize updates under "What's New in This Version"
+        1. If needed, update screenshots and other metadata.
+            1. iPhone 14 Pro Max for 6.7" Screenshots. 1290x2796
+            1. iPhone 12 Pro Max for 6.5" Screenshots
+            1. iPhone 8 Plus for 5.5" Screenshots 1242x2208
+            1. iPad Pro (4th Gen) for iPad Pro (3rd Gen) 12.9" Screenshots 2048x2732
+            1. iPad Pro (4th Gen) for iPad Pro (2nd Gen) 12.9" Screenshots
+        1. Click the button, "Select a build before you submit your app"
+            1. Select Yes for encryption and Yes for exemption.
+        1. Click Save
+        1. Wait for the notification that the app is ready to be tested in Test Flight
+        1. Test the app using Test Flight
 
 ## Remote Debugging
 
