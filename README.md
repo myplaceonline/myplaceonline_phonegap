@@ -34,6 +34,7 @@ For details, see parent project at https://github.com/myplaceonline/myplaceonlin
         1. Enable Automatic
         1. Signing & Capabilities } Debug } Team: ...
         1. Build Settings } Code Signing Identity } Release } Apple Development
+    1. If you want to test in emulators, select the emulator type and click Play
     1. Next to the play/stop buttons, to the right of myplaceonline, select Build } Any iOS Device
     1. Product } Archive
     1. Click Distribute App
