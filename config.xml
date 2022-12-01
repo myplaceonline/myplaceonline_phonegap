@@ -112,6 +112,7 @@ separately with the iOS build adding `.main` to the `id`.
     <icon height="58" platform="ios" src="res/icon/ios/icon-small@2x.png" width="58" />
     <icon height="87" platform="ios" src="res/icon/ios/icon-small@3x.png" width="87" />
     <icon height="1024" platform="ios" src="res/icon/ios/icon-1024.png" width="1024" />
+    <icon height="167" platform="ios" src="res/icon/ios/icon-167.png" width="167" />
 
     <splash height="1136" platform="ios" src="res/screen/ios/Default-568h@2x~iphone.png" width="640" />
     <splash height="1334" platform="ios" src="res/screen/ios/Default-667h.png" width="750" />

@@ -19,9 +19,12 @@ For details, see parent project at https://github.com/myplaceonline/myplaceonlin
 
 ### iOS
 
-* Add .main to config.xml
-* phonegap build ios
-* phonegap build ios --release -- --keystore="../../lib/keys/myplaceonline_android_phonegap.keystore" --alias=myplaceonline_alias
+1. Add .main to config.xml
+1. `open -a Xcode platforms/ios`
+    1. Wait for "Indexing" to complete
+    1. First time: Preferences } Accounts } Add } root@myplaceonline.com
+    1. Double click on FindHumane
+        1. Signing & Capabilities } Team: Kevin Grigorenko
 
 ## Remote Debugging
 
