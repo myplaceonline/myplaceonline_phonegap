@@ -20,6 +20,8 @@ For details, see parent project at https://github.com/myplaceonline/myplaceonlin
 ### iOS
 
 1. Add .main to config.xml
+1. `cordova platform rm ios`
+1. `cordova platform add ios`
 1. `open -a Xcode platforms/ios`
     1. Wait for "Indexing" to complete
     1. First time: Preferences } Accounts } Add } root@myplaceonline.com
